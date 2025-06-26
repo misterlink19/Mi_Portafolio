@@ -1,4 +1,137 @@
 {
-  "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Hello world {username}"
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"welcome": "Welcome to the SvelteKit Paraglide JS example.",
+	"about": "This is the /other page that only exists to illustrate routing with `localizeHref()`",
+	"unused": "This is an unused message to verify tree-shaking.",
+	"hello_world": "Hello {username}",
+	"nav": {
+		"home": "Home",
+		"about": "About Me",
+		"projects": "Projects",
+		"contact": "Contact"
+	},
+	"home": {
+		"title": "Full Stack Developer",
+		"summary": "I am a developer passionate about creating modern and efficient web solutions. I specialize in technologies like JavaScript, Python and modern frameworks.",
+		"greeting": "Hi! I'm Amle Martinez Marte.",
+		"learnMore": "Learn more about me"
+	},
+	"projects": {
+		"title": "My Projects",
+		"liveDemo": "View Demo",
+		"viewCode": "View Code",
+		"technologiesUsed": "Technologies used",
+		"p1": {
+			"name": "E-commerce Platform",
+			"description": "Complete platform with shopping cart, product management, user authentication, and payment gateway. Developed with a focus on scalability and user experience."
+		},
+		"p2": {
+			"name": "Task Management Application",
+			"description": "Real-time collaborative application for teams, with features like task assignment, progress tracking, and notifications. Optimized for high performance."
+		}
+	},
+	"contact": {
+		"title": "Contact",
+		"headerDescription": "Have a project in mind? Let's talk!",
+		"infoTitle": "Contact Information",
+		"locationTitle": "Location",
+		"whyWorkWithMe": "Why work with me?",
+		"benefit1": "Quick response within 24 hours",
+		"benefit2": "Development with the latest technologies",
+		"benefit3": "Clean and well-documented code",
+		"benefit4": "Post-development support",
+		"name": "Name",
+		"email": "Email",
+		"message": "Message",
+		"send": "Send",
+		"sending": "Sending...",
+		"success": "Message sent successfully. Thank you!",
+		"nameRequired": "Name is required.",
+		"emailRequired": "Email is required.",
+		"emailInvalid": "Email is not valid.",
+		"messageRequired": "Message is required.",
+		"errorMessage": "There was an error sending your message. Please try again."
+	},
+	"footer": {
+		"copyright": "© 2024 Amle Martinez Marte. All rights reserved.",
+		"builtWith": "Built with SvelteKit, Tailwind CSS, and Paraglide.js"
+	},
+	"skills": {
+		"basic": "Basic",
+		"intermediate": "Intermediate",
+		"advanced": "Advanced",
+		"expert": "Expert",
+		"native": "Native",
+		"technical": {
+			"frontend": "Frontend Development",
+			"backend": "Backend Development",
+			"database": "Databases",
+			"devops": "DevOps",
+			"mobile": "Mobile Development",
+			"uiux": "UI/UX Design"
+		},
+		"languages": {
+			"spanish": "Spanish",
+			"english": "English",
+			"french": "French"
+		},
+		"soft": {
+			"teamwork": "Teamwork",
+			"communication": "Effective Communication",
+			"problemSolving": "Problem Solving",
+			"adaptability": "Adaptability",
+			"leadership": "Leadership"
+		},
+		"hobbies": {
+			"personalProjects": "Personal Projects",
+			"techReading": "Tech Reading",
+			"gaming": "Gaming",
+			"photography": "Photography"
+		}
+	},
+	"timeline": {
+		"gap": "Gap of {n} year{s}",
+		"present": "Present",
+		"duration": "{n} year{s}"
+	},
+	"work": {
+		"1": {
+			"position": "Senior Developer",
+			"description": "Led the development of new features and the refactoring of legacy code in an enterprise web application, improving scalability and performance."
+		},
+		"2": {
+			"position": "Mid-Level Developer",
+			"description": "Designed and implemented RESTful APIs and NoSQL databases for a project management platform, integrating third-party services."
+		},
+		"3": {
+			"position": "Freelance Web Developer",
+			"description": "Developed and maintained websites and applications for various clients, managing the full project lifecycle from concept to deployment."
+		}
+	},
+	"education": {
+		"1": {
+			"degree": "Bachelor’s Degree in Computer Systems Engineering",
+			"description": "Undergraduate program focused on advanced algorithms, data structures, secure software development, and systems architecture. Capstone project on distributed systems."
+		},
+		"2": {
+			"degree": "Full Stack Web Development Diploma",
+			"description": "Intensive web development program covering modern front-end and back-end technologies, including hands-on projects."
+		}
+	},
+	"certificates": {
+		"aws": {
+			"name": "AWS Certified Developer – Associate",
+			"issuer": "Amazon Web Services"
+		},
+		"gcp": {
+			"name": "Google Cloud Professional – Solutions Architect",
+			"issuer": "Google Cloud"
+		}
+	},
+	"common": {
+		"language": "Language",
+		"theme": "Theme",
+		"scrollToTop": "Go back to the top"
+	},
+	"example_message": "Hello world {username}"
 }

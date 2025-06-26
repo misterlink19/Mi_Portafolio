@@ -1,0 +1,135 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"about": "Esta es la página /other que solo existe para ilustrar el enrutamiento con `localizeHref()`.",
+	"nav": {
+		"home": "Inicio",
+		"about": "Acerca de mí",
+		"projects": "Proyectos",
+		"contact": "Contacto"
+	},
+	"hello_world": "Saludos {username}",
+	"home": {
+		"title": "Desarrollador Full Stack",
+		"summary": "Soy un desarrollador apasionado por crear soluciones web modernas y eficientes. Me especializo en tecnologías como JavaScript, Python y frameworks modernos.",
+		"greeting": "¡Hola! Soy Amle Martinez Marte.",
+		"learnMore": "Conoce más sobre mí"
+	},
+	"projects": {
+		"title": "Mis Proyectos",
+		"liveDemo": "Ver Demo",
+		"viewCode": "Ver Código",
+		"technologiesUsed": "Tecnologías utilizadas",
+		"p1": {
+			"name": "Plataforma de comercio electrónico",
+			"description": "Plataforma completa con carrito de compras, gestión de productos, autenticación de usuarios y pasarela de pago. Desarrollada con enfoque en escalabilidad y experiencia de usuario."
+		},
+		"p2": {
+			"name": "Aplicación de gestión de tareas",
+			"description": "Aplicación colaborativa en tiempo real para equipos, con funcionalidades como asignación de tareas, seguimiento de progreso y notificaciones. Optimizado para alto rendimiento."
+		}
+	},
+	"contact": {
+		"title": "Contacto",
+		"headerDescription": "¿Tienes un proyecto en mente? ¡Hablemos!",
+		"infoTitle": "Información de Contacto",
+		"locationTitle": "Ubicación",
+		"whyWorkWithMe": "¿Por qué trabajar conmigo?",
+		"benefit1": "Respuesta rápida en menos de 24 horas",
+		"benefit2": "Desarrollo con las últimas tecnologías",
+		"benefit3": "Código limpio y bien documentado",
+		"benefit4": "Soporte post-desarrollo",
+		"name": "Nombre",
+		"email": "Correo electrónico",
+		"message": "Mensaje",
+		"send": "Enviar",
+		"sending": "Enviando...",
+		"success": "Mensaje enviado exitosamente. ¡Gracias!",
+		"nameRequired": "El nombre es requerido.",
+		"emailRequired": "El correo es requerido.",
+		"emailInvalid": "El correo no es válido.",
+		"messageRequired": "El mensaje es requerido.",
+		"errorMessage": "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo."
+	},
+	"footer": {
+		"copyright": "© 2024 Amle Martinez Marte. Todos los derechos reservados.",
+		"builtWith": "Construido con SvelteKit, Tailwind CSS y Paraglide.js"
+	},
+	"skills": {
+		"basic": "Básico",
+		"intermediate": "Intermedio",
+		"advanced": "Avanzado",
+		"expert": "Experto",
+		"native": "Nativo",
+		"technical": {
+			"frontend": "Desarrollo Frontend",
+			"backend": "Desarrollo Backend",
+			"database": "Bases de Datos",
+			"devops": "DevOps",
+			"mobile": "Desarrollo Móvil",
+			"uiux": "Diseño UI/UX"
+		},
+		"languages": {
+			"spanish": "Español",
+			"english": "Inglés",
+			"french": "Francés"
+		},
+		"soft": {
+			"teamwork": "Trabajo en equipo",
+			"communication": "Comunicación efectiva",
+			"problemSolving": "Resolución de problemas",
+			"adaptability": "Adaptabilidad",
+			"leadership": "Liderazgo"
+		},
+		"hobbies": {
+			"personalProjects": "Proyectos personales",
+			"techReading": "Lectura sobre tecnología",
+			"gaming": "Videojuegos",
+			"photography": "Fotografía"
+		}
+	},
+	"timeline": {
+		"gap": "Brecha de {n} año{s}",
+		"present": "Presente",
+		"duration": "{n} año{s}"
+	},
+	"work": {
+		"1": {
+			"position": "Desarrollador Senior",
+			"description": "Lideré el desarrollo de nuevas características y la refactorización de código legado en una aplicación web empresarial, mejorando la escalabilidad y el rendimiento."
+		},
+		"2": {
+			"position": "Desarrollador Mid-Level",
+			"description": "Diseñé e implementé APIs RESTful y bases de datos NoSQL para una plataforma de gestión de proyectos, integrando servicios de terceros."
+		},
+		"3": {
+			"position": "Desarrollador Web Freelance",
+			"description": "Desarrollé y mantuve sitios web y aplicaciones para diversos clientes, gestionando el ciclo de vida completo del proyecto desde el concepto hasta el despliegue."
+		}
+	},
+	"education": {
+		"1": {
+			"degree": "Ingeniería en Sistemas Computacionales",
+			"description": "Programa de grado enfocado en algoritmos avanzados, estructuras de datos, desarrollo de software seguro y arquitectura de sistemas. Proyecto final sobre sistemas distribuidos."
+		},
+		"2": {
+			"degree": "Diplomado en Desarrollo Web Full Stack",
+			"description": "Programa intensivo de desarrollo web cubriendo tecnologías front-end y back-end modernas, incluyendo prácticas en proyectos reales."
+		}
+	},
+	"certificates": {
+		"aws": {
+			"name": "Desarrollador Certificado AWS – Asociado",
+			"issuer": "Amazon Web Services"
+		},
+		"gcp": {
+			"name": "Google Cloud Professional – Arquitecto de Soluciones",
+			"issuer": "Google Cloud"
+		}
+	},
+	"common": {
+		"language": "Idioma",
+		"theme": "Tema",
+		"scrollToTop": "Volver al inicio"
+	},
+	"example_message": "Saludos {username}"
+}
