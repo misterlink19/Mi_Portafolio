@@ -10,7 +10,7 @@
 
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
-    import { fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import { ChevronUp } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages'; // Mensajes traducidos
 

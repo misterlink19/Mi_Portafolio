@@ -28,10 +28,10 @@ export const scrollElements = writable(new Set());
  * @param {HTMLElement} element - El elemento DOM (HTML) a añadir al conjunto.
  */
 export function addScrollElement(element) {
-    scrollElements.update((set) => {
-        set.add(element); // Agrega el elemento al Set.
-        return set; // Devuelve el Set actualizado.
-    });
+	scrollElements.update((set) => {
+		set.add(element); // Agrega el elemento al Set.
+		return set; // Devuelve el Set actualizado.
+	});
 }
 
 /**
@@ -41,8 +41,8 @@ export function addScrollElement(element) {
  * @param {HTMLElement} element - El elemento DOM (HTML) a eliminar del conjunto.
  */
 export function removeScrollElement(element) {
-    scrollElements.update((set) => {
-        set.delete(element); // Elimina el elemento del Set.
-        return set; // Devuelve el Set actualizado.
-    });
+	scrollElements.update((set) => {
+		set.delete(element); // Elimina el elemento del Set.
+		return set; // Devuelve el Set actualizado.
+	});
 }

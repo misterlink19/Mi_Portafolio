@@ -21,24 +21,24 @@ import { paraglideMiddleware } from '$lib/paraglide/server';
  * 4. Inyectar el idioma en el atributo `lang` de la etiqueta `<html>` del HTML final.
  */
 const paraglideHandle: Handle = ({ event, resolve }) =>
-    paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
-        // Actualiza el objeto `request` con la versión localizada por Paraglide.js.
-        event.request = localizedRequest;
-    
-        // Almacena el idioma detectado en `event.locals` para que sea accesible
-        // en otras partes del servidor (e.g., funciones `load`).
-        (event.locals as any).paraglide = { lang: locale };
+	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
+		// Actualiza el objeto `request` con la versión localizada por Paraglide.js.
+		event.request = localizedRequest;
 
-        // Resuelve la solicitud con SvelteKit, aplicando transformaciones adicionales.
-        return resolve(event, {
-            // `transformPageChunk` modifica el HTML generado.
-            // Reemplaza el placeholder `%lang%` con el idioma detectado,
-            // típicamente usado en `<html lang="%lang%">` en `src/app.html`.
-            transformPageChunk: ({ html }) => {
-                return html.replace('%lang%', locale);
-            }
-        });
-    });
+		// Almacena el idioma detectado en `event.locals` para que sea accesible
+		// en otras partes del servidor (e.g., funciones `load`).
+		(event.locals as any).paraglide = { lang: locale };
+
+		// Resuelve la solicitud con SvelteKit, aplicando transformaciones adicionales.
+		return resolve(event, {
+			// `transformPageChunk` modifica el HTML generado.
+			// Reemplaza el placeholder `%lang%` con el idioma detectado,
+			// típicamente usado en `<html lang="%lang%">` en `src/app.html`.
+			transformPageChunk: ({ html }) => {
+				return html.replace('%lang%', locale);
+			}
+		});
+	});
 
 /**
  * Exporta el hook `paraglideHandle` como el `handle` principal de SvelteKit.

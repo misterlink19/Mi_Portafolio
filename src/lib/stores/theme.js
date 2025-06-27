@@ -36,15 +36,16 @@ export const theme = writable(initialTheme);
  * por Tailwind CSS para aplicar estilos específicos del modo oscuro.
  */
 theme.subscribe((value) => {
-    if (browser) { // Asegura que solo se ejecute en el entorno del navegador.
-        localStorage.setItem('theme', value); // Guarda la preferencia del usuario.
+	if (browser) {
+		// Asegura que solo se ejecute en el entorno del navegador.
+		localStorage.setItem('theme', value); // Guarda la preferencia del usuario.
 
-        if (value === 'dark') {
-            document.documentElement.classList.add('dark'); // Aplica estilos oscuros.
-        } else {
-            document.documentElement.classList.remove('dark'); // Aplica estilos claros.
-        }
-    }
+		if (value === 'dark') {
+			document.documentElement.classList.add('dark'); // Aplica estilos oscuros.
+		} else {
+			document.documentElement.classList.remove('dark'); // Aplica estilos claros.
+		}
+	}
 });
 
 /**
@@ -55,5 +56,5 @@ theme.subscribe((value) => {
  * lo que automáticamente activa la suscripción y actualiza la UI.
  */
 export function toggleTheme() {
-    theme.update((t) => (t === 'light' ? 'dark' : 'light'));
+	theme.update((t) => (t === 'light' ? 'dark' : 'light'));
 }
