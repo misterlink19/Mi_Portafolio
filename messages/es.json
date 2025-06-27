@@ -9,6 +9,7 @@
 	},
 	"hello_world": "Saludos {username}",
 	"home": {
+		"welcome": "¡Bienvenido!",
 		"title": "Desarrollador Full Stack",
 		"summary": "Soy un desarrollador apasionado por crear soluciones web modernas y eficientes. Me especializo en tecnologías como JavaScript, Python y frameworks modernos.",
 		"greeting": "¡Hola! Soy Amle Martinez Marte.",

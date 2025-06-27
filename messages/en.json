@@ -11,6 +11,7 @@
 		"contact": "Contact"
 	},
 	"home": {
+		"welcome": "Welcome!",
 		"title": "Full Stack Developer",
 		"summary": "I am a developer passionate about creating modern and efficient web solutions. I specialize in technologies like JavaScript, Python and modern frameworks.",
 		"greeting": "Hi! I'm Amle Martinez Marte.",
