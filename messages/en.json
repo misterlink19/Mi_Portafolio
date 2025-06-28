@@ -1,154 +1,182 @@
 {
-	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"about": "This is the /other page that only exists to illustrate routing with `localizeHref()`.",
-	"nav": {
-		"home": "Home",
-		"about": "About me",
-		"projects": "Projects",
-		"contact": "Contact"
-	},
-	"hello_world": "Greetings {username}",
-	"home": {
-		"welcome": "Welcome!",
-		"title": "Full Stack Developer",
-		"summary": "I’m a developer passionate about creating modern, efficient web solutions. I specialize in technologies like JavaScript, Python, and modern frameworks.",
-		"greeting": "Hello! I’m Amle Martinez Marte.",
-		"learnMore": "Learn more about me"
-	},
-	"projects": {
-		"title": "My Projects",
-		"liveDemo": "Live Demo",
-		"viewCode": "View Code",
-		"technologiesUsed": "Technologies used",
-		"p1": {
-			"name": "E-commerce Platform",
-			"description": "A full-featured platform with shopping cart, product management, user authentication, and payment gateway. Built for scalability and user experience."
-		},
-		"p2": {
-			"name": "Task Management App",
-			"description": "A real-time collaborative app for teams with task assignment, progress tracking, and notifications. Optimized for high performance."
-		},
-		"subtitle": "Projects ordered chronologically, from newest to oldest",
-		"noImage": "No image available",
-		"p3": {
-			"name": "My Old Portfolio (V1)",
-			"description": "An earlier version of my personal portfolio, built with basic web development technologies."
-		}
-	},
-	"contact": {
-		"title": "Contact",
-		"headerDescription": "Got a project in mind? Let’s talk!",
-		"infoTitle": "Contact Information",
-		"locationTitle": "Location",
-		"whyWorkWithMe": "Why work with me?",
-		"benefit1": "Quick response within 24 hours",
-		"benefit2": "Development with the latest technologies",
-		"benefit3": "Clean, well-documented code",
-		"benefit4": "Post-development support",
-		"name": "Name",
-		"email": "Email",
-		"message": "Message",
-		"send": "Send",
-		"sending": "Sending…",
-		"success": "Message sent successfully. Thank you!",
-		"nameRequired": "Name is required.",
-		"emailRequired": "Email is required.",
-		"emailInvalid": "Email is not valid.",
-		"messageRequired": "Message is required.",
-		"errorMessage": "There was an error sending your message. Please try again."
-	},
-	"footer": {
-		"copyright": "© 2024 Amle Martinez Marte. All rights reserved.",
-		"builtWith": "Built with SvelteKit, Tailwind CSS, and Paraglide.js"
-	},
-	"skills": {
-		"basic": "Basic",
-		"intermediate": "Intermediate",
-		"advanced": "Advanced",
-		"expert": "Expert",
-		"native": "Native",
-		"technical": {
-			"frontend": "Frontend Development",
-			"backend": "Backend Development",
-			"database": "Databases",
-			"devops": "DevOps",
-			"mobile": "Mobile Development",
-			"uiux": "UI/UX Design"
-		},
-		"languages": {
-			"spanish": "Spanish",
-			"english": "English",
-			"french": "French"
-		},
-		"soft": {
-			"teamwork": "Teamwork",
-			"communication": "Effective Communication",
-			"problemSolving": "Problem Solving",
-			"adaptability": "Adaptability",
-			"leadership": "Leadership"
-		},
-		"hobbies": {
-			"personalProjects": "Personal Projects",
-			"techReading": "Tech Reading",
-			"gaming": "Gaming",
-			"photography": "Photography"
-		}
-	},
-	"timeline": {
-		"gap": "Gap of {n} year{s}",
-		"present": "Present",
-		"duration": "{n} year{s}"
-	},
-	"work": {
-		"1": {
-			"position": "Senior Developer",
-			"description": "Led the development of new features and refactored legacy code in an enterprise web application, improving scalability and performance."
-		},
-		"2": {
-			"position": "Mid-Level Developer",
-			"description": "Designed and implemented RESTful APIs and NoSQL databases for a project management platform, integrating third-party services."
-		},
-		"3": {
-			"position": "Freelance Web Developer",
-			"description": "Developed and maintained websites and applications for various clients, managing the full project lifecycle from concept to deployment."
-		}
-	},
-	"education": {
-		"1": {
-			"degree": "Bachelor in Computer Systems Engineering",
-			"description": "Degree program focused on advanced algorithms, data structures, secure software development, and system architecture. Final project on distributed systems."
-		},
-		"2": {
-			"degree": "Full Stack Web Development Diploma",
-			"description": "Intensive program covering modern front-end and back-end technologies, including hands-on practice with real projects."
-		}
-	},
-	"certificates": {
-		"aws": {
-			"name": "AWS Certified Developer – Associate",
-			"issuer": "Amazon Web Services"
-		},
-		"gcp": {
-			"name": "Google Cloud Professional – Cloud Architect",
-			"issuer": "Google Cloud"
-		}
-	},
-	"common": {
-		"language": "Language",
-		"theme": "Theme",
-		"scrollToTop": "Back to top"
-	},
-	"example_message": "Greetings {username}",
-	"section": {
-		"technologies": "Technologies",
-		"workExperience": "Work Experience",
-		"education": "Education",
-		"projects": "Projects",
-		"technicalSkills": "Technical Skills",
-		"otherSkills": "Other Skills",
-		"softSkills": "Soft Skills",
-		"languages": "Languages",
-		"hobbies": "Hobbies",
-		"certificates": "Certificates"
-	}
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "about": "This is the /other page that only exists to illustrate routing with `localizeHref()`.",
+    "nav": {
+        "home": "Home",
+        "about": "About me",
+        "projects": "Projects",
+        "contact": "Contact"
+    },
+    "hello_world": "Greetings {username}",
+    "home": {
+        "welcome": "Welcome!",
+        "title": "Full Stack Developer",
+        "summary": "I’m a developer passionate about creating modern, efficient web solutions. I specialize in technologies like JavaScript, Python, and modern frameworks.",
+        "greeting": "Hello! I’m Amle Martinez Marte.",
+        "learnMore": "Learn more about me",
+        "CV": "Junior Backend Developer with a solid foundation in Java and Python. Currently pursuing a Master in Agile Software Development at the University of Alcalá, with projects applying Spring Boot, CI/CD and microservices. Previous experience in technical support with focus on task automation and process improvement. Oriented to continuous learning and teamwork."
+    },
+    "projects": {
+        "title": "My Projects",
+        "liveDemo": "Live Demo",
+        "viewCode": "View Code",
+        "technologiesUsed": "Technologies used",
+        "p1": {
+            "name": "E-commerce Platform",
+            "description": "A full-featured platform with shopping cart, product management, user authentication, and payment gateway. Built for scalability and user experience."
+        },
+        "p2": {
+            "name": "Task Management App",
+            "description": "A real-time collaborative app for teams with task assignment, progress tracking, and notifications. Optimized for high performance."
+        },
+        "subtitle": "Projects ordered chronologically, from newest to oldest",
+        "noImage": "No image available",
+        "p3": {
+            "name": "My Old Portfolio (V1)",
+            "description": "An earlier version of my personal portfolio, built with basic web development technologies."
+        }
+    },
+    "contact": {
+        "title": "Contact",
+        "headerDescription": "Got a project in mind? Let’s talk!",
+        "infoTitle": "Contact Information",
+        "locationTitle": "Location",
+        "whyWorkWithMe": "Why work with me?",
+        "benefit1": "Quick response within 24 hours",
+        "benefit2": "Development with the latest technologies",
+        "benefit3": "Clean, well-documented code",
+        "benefit4": "Post-development support",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "send": "Send",
+        "sending": "Sending…",
+        "success": "Message sent successfully. Thank you!",
+        "nameRequired": "Name is required.",
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Email is not valid.",
+        "messageRequired": "Message is required.",
+        "errorMessage": "There was an error sending your message. Please try again."
+    },
+    "footer": {
+        "copyright": "© 2025 Amle Martinez Marte. All rights reserved.",
+        "builtWith": "Built with SvelteKit, Tailwind CSS, and Paraglide.js"
+    },
+    "skills": {
+        "basic": "Basic",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced",
+        "expert": "Expert",
+        "native": "Native",
+       "technical": {
+        "frontend": "Frontend Development",
+        "backend": "Backend Development",
+        "database": "Databases",
+        "devops": "DevOps",
+        "mobile": "Mobile Development",
+        "uiux": "UI/UX Design",
+        "web": "Web Development",
+        "security": "Cybersecurity",
+        "scrum": "Agile Methodologies (Scrum)",
+        "container": "Containers (Docker, Kubernetes)",
+        "network": "Networks and Systems"
+    },
+        "languages": {
+            "spanish": "Spanish",
+            "english": "English",
+            "french": "French"
+        },
+        "soft": {
+        "teamwork": "Teamwork",
+        "problemSolving": "Problem Solving",
+        "adaptability": "Adaptability",
+        "proactivity": "Proactivity & Initiative",
+        "organization": "Organization & Planning",
+        "continuousLearning": "Continuous Learning",
+        "communication": "Effective Communication",
+        "resilience": "Resilience",
+        "selfAwareness": "Self-awareness"
+    },
+       "hobbies": {
+        "readingBooks": "Book Reading",
+        "readingComicsManga": "Comics & Manga Reading",
+        "playingPiano": "Playing Piano",
+        "listeningMedia": "Podcasts & Audiobooks",
+        "watchingMedia": "Movies & TV Series",
+        "gaming": "Gaming"
+    }
+    },
+    "timeline": {
+        "gap": "Gap of {n} year{s}",
+        "present": "Present",
+        "duration": "{n} year{s}"
+    },
+    "work": {
+        "1": {
+            "position": "IT Support Technician",
+            "description": "My job involved providing technical support to the company's 60 branches nationwide. This included helping users resolve network or system equipment issues, configuring IT equipment and VoIP phones. I also performed database queries to generate necessary company reports and documented internal IT department processes. Additionally, I created scripts to automate software updates and network performance monitoring, and tracked company vehicles using GPS devices."
+        },
+        "2": {
+            "position": "IT Support Technician",
+            "description": "As an IT technician, I performed the following tasks at the center: installation, configuration, and software/hardware updates for devices; troubleshooting technical issues affecting system and network performance; collaborating with the cybersecurity manager to enhance software protection through pentesting; and teamwork with personnel from other areas to ensure the security and quality of IT services."
+        }
+    },
+    "education": {
+        "1": {
+            "degree": "Master's Degree in Agile Web Software Development",
+            "description": "This master's program trains me as a Full Stack developer, mastering agile methodologies (Scrum, Kanban) and continuous integration and deployment (CI/CD) practices. I have applied this knowledge in projects such as the development of a Formula 1 web portal in Java with Spring Boot and Thymeleaf, the implementation of CI/CD with GitHub Actions, and the creation of a movie portal with 5 microservices for user registration and comments. Acquired competencies include applying agile knowledge and methodologies in the design, development, and implementation of web applications, creating enterprise applications based on microservices architecture, and developing complex, interactive, and responsive web applications with high usability."
+        },
+        "2": {
+            "degree": "Bachelor's Degree in Computer Science",
+            "description": "I completed my studies with Magna Cum Laude honors, achieving an average GPA of 93.6. During this period, I gained solid competencies in programming, covering languages such as Java, C++, HTML, and JavaScript, in addition to mastering database design and network and systems administration. I complemented my academic training with an active volunteer role in the IT department, where I collaborated on essential tasks such as the installation and maintenance of computer equipment. Additionally, I had the opportunity to serve as an assistant to a Physics professor, which involved supporting in the preparation and evaluation of classes."
+        }
+    },
+    "certificates": {
+        "fds": {
+            "name": "Foundations of Scrum",
+            "issuer": "Scrumstudy"
+        },
+        "acis": {
+            "name": "Diploma in Cybersecurity, Cloud Computing, and Telecommuting",
+            "issuer": "Association of Merchants and Industrialists (ACIS)"
+        },
+        "itla": {
+            "name": "Ethical Hacker",
+            "issuer": "Instituto Tecnológico de Las Américas (ITLA)"
+        },
+        "oea": {
+            "name": "Cybersecurity",
+            "issuer": "Organization of American States (OEA)"
+        },
+        "mescyt": {
+            "name": "Recognition in Web Programming with HTML, CSS, and JavaScript, and in Python Programming",
+            "issuer": "Ministry of Higher Education, Science and Technology (MESCyT)"
+        },
+        "eoi": {
+            "name": "Cybersecurity",
+            "issuer": "Escuela de Organización Industrial (EOI)"
+        },
+        "mescyt2": {
+            "name": "English Immersion for Competitiveness",
+            "issuer": "Ministry of Higher Education, Science and Technology (MESCyT)"
+        }
+    },
+    "common": {
+        "language": "Language",
+        "theme": "Theme",
+        "scrollToTop": "Back to top"
+    },
+    "example_message": "Greetings {username}",
+    "section": {
+        "technologies": "Technologies",
+        "workExperience": "Work Experience",
+        "education": "Education",
+        "projects": "Projects",
+        "technicalSkills": "Technical Skills",
+        "otherSkills": "Other Skills",
+        "softSkills": "Soft Skills",
+        "languages": "Languages",
+        "hobbies": "Hobbies",
+        "certificates": "Certificates"
+    }
 }

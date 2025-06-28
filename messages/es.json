@@ -13,7 +13,8 @@
 		"title": "Desarrollador Full Stack",
 		"summary": "Soy un desarrollador apasionado por crear soluciones web modernas y eficientes. Me especializo en tecnologías como JavaScript, Python y frameworks modernos.",
 		"greeting": "¡Hola! Soy Amle Martinez Marte.",
-		"learnMore": "Conoce más sobre mí"
+		"learnMore": "Conoce más sobre mí",
+		"CV": "Desarrollador Backend Junior con base sólida en Java y Python. Actualmente curso un Máster en Desarrollo Ágil de Software en la Universidad de Alcalá, con proyectos aplicando Spring Boot, CI/CD y microservicios. Experiencia previa en soporte técnico con foco en automatización de tareas y mejora de procesos. Orientado al aprendizaje continuo y al trabajo en equipo"
 	},
 	"projects": {
 		"title": "Mis Proyectos",
@@ -58,7 +59,7 @@
 		"errorMessage": "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo."
 	},
 	"footer": {
-		"copyright": "© 2024 Amle Martinez Marte. Todos los derechos reservados.",
+		"copyright": "© 2025 Amle Martinez Marte. Todos los derechos reservados.",
 		"builtWith": "Construido con SvelteKit, Tailwind CSS y Paraglide.js"
 	},
 	"skills": {
@@ -68,31 +69,42 @@
 		"expert": "Experto",
 		"native": "Nativo",
 		"technical": {
-			"frontend": "Desarrollo Frontend",
-			"backend": "Desarrollo Backend",
-			"database": "Bases de Datos",
-			"devops": "DevOps",
-			"mobile": "Desarrollo Móvil",
-			"uiux": "Diseño UI/UX"
-		},
+            "frontend": "Desarrollo Frontend",
+            "backend": "Desarrollo Backend",
+            "database": "Bases de Datos",
+            "devops": "DevOps",
+            "mobile": "Desarrollo Móvil",
+            "uiux": "Diseño UI/UX",
+            "web": "Desarrollo Web",
+            "security": "Ciberseguridad",
+            "scrum": "Metodologías Ágiles (Scrum)",
+            "container": "Contenedores (Docker, Kubernetes)",
+            "network": "Redes y Sistemas"
+        },
 		"languages": {
 			"spanish": "Español",
 			"english": "Inglés",
 			"french": "Francés"
 		},
 		"soft": {
-			"teamwork": "Trabajo en equipo",
-			"communication": "Comunicación efectiva",
-			"problemSolving": "Resolución de problemas",
-			"adaptability": "Adaptabilidad",
-			"leadership": "Liderazgo"
-		},
+        "teamwork": "Trabajo en equipo",
+        "problemSolving": "Resolución de problemas",
+        "adaptability": "Adaptabilidad",
+        "proactivity": "Proactividad e Iniciativa",
+        "organization": "Organización y Planificación",
+        "continuousLearning": "Disposición al Aprendizaje Continuo",
+        "communication": "Comunicación Efectiva",
+        "resilience": "Resiliencia",
+        "selfAwareness": "Autoconciencia"
+    },
 		"hobbies": {
-			"personalProjects": "Proyectos personales",
-			"techReading": "Lectura sobre tecnología",
-			"gaming": "Videojuegos",
-			"photography": "Fotografía"
-		}
+        "readingBooks": "Lectura de libros",
+        "readingComicsManga": "Lectura de cómics y manga",
+        "playingPiano": "Tocar el piano",
+        "listeningMedia": "Escucha de podcasts y audiolibros",
+        "watchingMedia": "Cine y series",
+        "gaming": "Videojuegos"
+    }
 	},
 	"timeline": {
 		"gap": "Brecha de {n} año{s}",
@@ -101,36 +113,52 @@
 	},
 	"work": {
 		"1": {
-			"position": "Desarrollador Senior",
-			"description": "Lideré el desarrollo de nuevas características y la refactorización de código legado en una aplicación web empresarial, mejorando la escalabilidad y el rendimiento."
+			"position": "Soporte Técnico de TI",
+			"description": "Mi trabajo consistió en dar soporte técnico a las 60 sucursales de la empresa en todo el país. Ayudando a los usuarios a resolver problemas con la red o los equipos del sistema, y configurando equipos informáticos y teléfonos VoIP. También realizando consultas a la base de datos para obtener informes que la empresa necesita, y documentando los procesos internos del departamento de informática. Además, cree scripts para automatizar procesos de actualización de software y de rendimiento de red, y hacia seguimiento a los vehículos de la empresa mediante dispositivos GPS."
 		},
 		"2": {
-			"position": "Desarrollador Mid-Level",
-			"description": "Diseñé e implementé APIs RESTful y bases de datos NoSQL para una plataforma de gestión de proyectos, integrando servicios de terceros."
-		},
-		"3": {
-			"position": "Desarrollador Web Freelance",
-			"description": "Desarrollé y mantuve sitios web y aplicaciones para diversos clientes, gestionando el ciclo de vida completo del proyecto desde el concepto hasta el despliegue."
+			"position": "Soporte Técnico de TI",
+			"description": "Como técnico informático, realicé las siguientes tareas en el centro: instalación, configuración y actualización de software y hardware de los dispositivos; resolución de problemas técnicos que afectaban el rendimiento de los sistemas y la red; colaboración con el responsable de ciberseguridad para mejorar la protección de los softwares mediante pentesting; y trabajo en equipo con el personal de otras áreas para garantizar la seguridad y la calidad de los servicios informáticos."
 		}
 	},
 	"education": {
 		"1": {
-			"degree": "Ingeniería en Sistemas Computacionales",
-			"description": "Programa de grado enfocado en algoritmos avanzados, estructuras de datos, desarrollo de software seguro y arquitectura de sistemas. Proyecto final sobre sistemas distribuidos."
+			"degree": "Master Universitario en Desarrollo Ágil de Software para la Web",
+			"description": "Este máster me forma como desarrollador Full Stack, dominando metodologías ágiles (Scrum, Kanban) y prácticas de integración y despliegue continuo (CI/CD). He aplicado estos conocimientos en proyectos como el desarrollo de un portal web de Fórmula 1 en Java con Spring Boot y Thymeleaf, la implementación de CI/CD con GitHub Actions, y la creación de un portal de películas con 5 microservicios para registro y comentarios. Las competencias adquiridas incluyen la aplicación de conocimientos y metodologías ágiles en el diseño, desarrollo e implementación de aplicaciones web, la creación de aplicaciones empresariales basadas en arquitectura de microservicios, y el desarrollo de aplicaciones web complejas, interactivas y responsivas con alta usabilidad."
 		},
 		"2": {
-			"degree": "Diplomado en Desarrollo Web Full Stack",
-			"description": "Programa intensivo de desarrollo web cubriendo tecnologías front-end y back-end modernas, incluyendo prácticas en proyectos reales."
+			"degree": "Licenciatura en Informática",
+			"description": "Finalicé mis estudios con el grado de Magna Cum Laude, alcanzando un promedio de 93.6. Durante este periodo, adquirí sólidas competencias en programación, abarcando lenguajes como Java, C++, HTML y JavaScript, además de dominar el diseño de bases de datos y la administración de redes y sistemas. Complementé mi formación académica con un activo rol de voluntariado en el departamento de informática, donde colaboré en tareas esenciales de instalación y mantenimiento de equipos informáticos. Adicionalmente, tuve la oportunidad de desempeñarme como Asistente de un profesor de Física, lo que implicó apoyar en la preparación y evaluación de las clases."
 		}
 	},
 	"certificates": {
-		"aws": {
-			"name": "Desarrollador Certificado AWS – Asociado",
-			"issuer": "Amazon Web Services"
+		"fds": {
+			"name": "Fundamentos de Scrum",
+			"issuer": "Scrumstudy"
 		},
-		"gcp": {
-			"name": "Google Cloud Professional – Arquitecto de Soluciones",
-			"issuer": "Google Cloud"
+		"acis": {
+			"name": "Diplomado en Ciberseguridad, Computación en la Nube y Teletrabajo ",
+			"issuer": "Asociación de Comerciantes e Industriales (ACIS)"
+		},
+		"itla": {
+			"name": "Hacker Ético",
+			"issuer": "Instituto Tecnológico de Las Américas (ITLA)"
+		},
+		"oea": {
+			"name": "Ciberseguridad",
+			"issuer": "Organización de los Estados Americanos (OEA)"
+		},
+		"mescyt": {
+			"name": "Reconocimiento en Programacion Web con HTML, CSS y javascript, y en Programacion Python",
+			"issuer": "Ministerio de Educación Superior, Ciencia y Tecnología (MESCyT)"
+		},
+		"eoi": {
+			"name": "Ciberseguridad",
+			"issuer": "Escuela de Organización Industrial (EOI)"
+		},
+		"mescyt2": {
+			"name": "Inmersión en inglés para la Competitividad",
+			"issuer": "Ministerio de Educación Superior, Ciencia y Tecnología (MESCyT)"
 		}
 	},
 	"common": {

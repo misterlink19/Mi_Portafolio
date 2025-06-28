@@ -100,8 +100,8 @@
 		id: `work-item-${item.id || index}`,
 		type: 'work' as const,
 		company: item.company,
-		position: getMessage(item.positionKey), // Traduce la posición
-		description: getMessage(item.descriptionKey), // Traduce la descripción
+		position: getMessage(item.positionKey),
+		description: getMessage(item.descriptionKey),
 		startYear: item.startYear,
 		endYear: item.endYear,
 		technologies: item.technologies
@@ -112,35 +112,29 @@
 		id: `edu-item-${item.id || index}`,
 		type: 'education' as const,
 		institution: item.institution,
-		degree: getMessage(item.degreeKey), // Traduce el grado
-		description: getMessage(item.descriptionKey), // Traduce la descripción
+		degree: getMessage(item.degreeKey),
+		description: getMessage(item.descriptionKey),
 		startYear: item.startYear,
 		endYear: item.endYear
 	}));
 
 	// Adapta las habilidades técnicas para el componente `SkillItem`.
 	const processedTechnicalSkillsForDisplay = skills.technical.map((skill) => ({
-		name: getMessage(skill.nameKey), // Traduce el nombre de la habilidad
+		name: getMessage(skill.nameKey),
 		level: skill.level
 	}));
 
 	// Adapta las habilidades de idiomas para el componente `SkillItem`.
 	const processedLanguageSkillsForDisplay = skills.languages.map((skill) => ({
-		name: getMessage(skill.nameKey), // Traduce el nombre del idioma
+		name: getMessage(skill.nameKey),
 		level: skill.level
 	}));
-
-	/**
-	 * @type {string} summaryText - El texto de resumen personal, seleccionado directamente
-	 * del objeto `personalInfo.summary` usando el idioma actual.
-	 */
-	const summaryText = personalInfo.summary[lang];
 </script>
 
 <svelte:head>
 	<!-- Establece el título de la página y la meta descripción para SEO -->
 	<title>{personalInfo.name} - {m['nav.about']()}</title>
-	<meta name="description" content={summaryText} />
+	<meta name="description" content={m['home.CV']()} />
 </svelte:head>
 
 <!-- Contenedor principal de la página con estilos de espaciado y fuente -->
@@ -177,6 +171,7 @@
 								src={personalInfo.photo}
 								alt={personalInfo.name}
 								class="w-40 h-40 rounded-full mx-auto mb-6 object-cover shadow-lg border-4 border-blue-500"
+								style="object-position: top center;"
 							/>
 							<!-- Nombre y Título/Profesión -->
 							<h1
@@ -187,9 +182,9 @@
 							<h2 class="text-xl lg:text-2xl font-semibold text-blue-600 dark:text-blue-400 mb-6">
 								{personalInfo.title}
 							</h2>
-							<!-- Resumen personal (traducido) -->
+							<!-- CV personal (traducido) -->
 							<p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
-								{summaryText}
+								{m['home.CV']()}
 							</p>
 							<!-- Información de contacto básica (email y ubicación) -->
 							<div class="flex justify-center space-x-6 mt-auto">
@@ -243,7 +238,9 @@
 										/>
 										<!-- Nombre y nivel de la tecnología -->
 										<p class="text-sm text-gray-600 dark:text-gray-400">{tech.name}</p>
-										<p class="text-xs text-blue-600 dark:text-blue-400 font-medium">{tech.level}</p>
+										<p class="text-xs text-blue-600 dark:text-blue-400 font-medium">
+											{m[tech.level]()}
+										</p>
 									</div>
 								{/each}
 							</div>
@@ -322,7 +319,44 @@
 				{/if}
 			</div>
 
-			<!-- Tarjeta de Idiomas -->
+		
+
+			<!-- Tarjeta de Certificaciones (ocupa 2 columnas en md y lg) -->
+			<div class="md:col-span-2" data-animate-id="certificates-card">
+				{#if mounted && visibleElements.has('certificates-card')}
+					<div transition:fly={{ y: 30, duration: 600, delay: 500, easing: quintOut }}>
+						<div
+							class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
+						>
+							<h3
+								class="text-2xl font-semibold text-gray-800 dark:text-white mb-5 border-b-2 border-blue-500 pb-2"
+							>
+								{m['section.certificates']()}
+							</h3>
+							<!-- Lista de certificaciones -->
+							<ul class="list-none text-gray-700 dark:text-gray-300 space-y-4">
+								{#each skills.certificates as cert, index}
+									<li
+										class="border-l-4 border-yellow-500 pl-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors duration-200"
+										transition:fly={{ x: -20, duration: 400, delay: index * 50, easing: quintOut }}
+									>
+										<h4 class="font-semibold text-gray-900 dark:text-white text-lg">
+											{getMessage(cert.nameKey)}
+										</h4>
+										<p class="text-gray-600 dark:text-gray-400 text-base">
+											{getMessage(cert.issuerKey)} - {cert.date}
+										</p>
+									</li>
+								{/each}
+							</ul>
+						</div>
+					</div>
+				{:else}
+					<!-- Marcador de posición animado para certificaciones -->
+					<div class="bg-gray-100 dark:bg-gray-700 rounded-2xl p-8 h-[250px] animate-pulse"></div>
+				{/if}
+			</div>
+				<!-- Tarjeta de Idiomas -->
 			<div data-animate-id="languages-card">
 				{#if mounted && visibleElements.has('languages-card')}
 					<div transition:fly={{ y: 30, duration: 600, delay: 200, easing: quintOut }}>
@@ -407,42 +441,6 @@
 				{:else}
 					<!-- Marcador de posición animado para hobbies -->
 					<div class="bg-gray-100 dark:bg-gray-700 rounded-2xl p-8 h-[200px] animate-pulse"></div>
-				{/if}
-			</div>
-
-			<!-- Tarjeta de Certificaciones (ocupa 2 columnas en md y lg) -->
-			<div class="md:col-span-2" data-animate-id="certificates-card">
-				{#if mounted && visibleElements.has('certificates-card')}
-					<div transition:fly={{ y: 30, duration: 600, delay: 500, easing: quintOut }}>
-						<div
-							class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
-						>
-							<h3
-								class="text-2xl font-semibold text-gray-800 dark:text-white mb-5 border-b-2 border-blue-500 pb-2"
-							>
-								{m['section.certificates']()}
-							</h3>
-							<!-- Lista de certificaciones -->
-							<ul class="list-none text-gray-700 dark:text-gray-300 space-y-4">
-								{#each skills.certificates as cert, index}
-									<li
-										class="border-l-4 border-yellow-500 pl-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors duration-200"
-										transition:fly={{ x: -20, duration: 400, delay: index * 50, easing: quintOut }}
-									>
-										<h4 class="font-semibold text-gray-900 dark:text-white text-lg">
-											{getMessage(cert.nameKey)}
-										</h4>
-										<p class="text-gray-600 dark:text-gray-400 text-base">
-											{getMessage(cert.issuerKey)} - {cert.date}
-										</p>
-									</li>
-								{/each}
-							</ul>
-						</div>
-					</div>
-				{:else}
-					<!-- Marcador de posición animado para certificaciones -->
-					<div class="bg-gray-100 dark:bg-gray-700 rounded-2xl p-8 h-[250px] animate-pulse"></div>
 				{/if}
 			</div>
 		</div>

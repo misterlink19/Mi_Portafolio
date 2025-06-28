@@ -73,7 +73,7 @@
 				</h3>
 
 				<p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-8">
-					{personalInfo.summary[currentLocale]}
+					{m['home.summary']()}
 				</p>
 
 				<button
