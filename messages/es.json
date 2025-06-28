@@ -22,18 +22,22 @@
 		"viewCode": "Ver Código",
 		"technologiesUsed": "Tecnologías utilizadas",
 		"p1": {
-			"name": "Plataforma de comercio electrónico",
-			"description": "Plataforma completa con carrito de compras, gestión de productos, autenticación de usuarios y pasarela de pago. Desarrollada con enfoque en escalabilidad y experiencia de usuario."
+			"name": "Proyecto Viajes Confort",
+			"description": "Proyecto Viajes Confort es una tienda en línea especializada en maletas y equipajes. La aplicación permite a los usuarios explorar productos, gestionar un carrito de compras y, de forma opcional, acceder a un panel administrativo para el mantenimiento del inventario."
 		},
 		"p2": {
-			"name": "Aplicación de gestión de tareas",
-			"description": "Aplicación colaborativa en tiempo real para equipos, con funcionalidades como asignación de tareas, seguimiento de progreso y notificaciones. Optimizado para alto rendimiento."
+			"name": "Portal de Fórmula 1",
+			"description": "Aplicación web para la gestión de un portal de Fórmula 1, permitiendo a los aficionados acceder a noticias y votaciones, a los equipos realizar cálculos de rendimiento, y a los administradores gestionar el contenido y los usuarios del sitio."
 		},
 		"subtitle": "Proyectos ordenados cronológicamente, del más reciente al más antiguo",
 		"noImage": "No hay imagen disponible",
 		"p3": {
-			"name": "Mi Portafolio Antiguo (V1)",
-			"description": "Una versión anterior de mi portafolio personal, construida con tecnologías básicas de desarrollo web."
+			"name": "Gestión de Películas con Microservicios ",
+			"description": "Este proyecto es la evolución de una aplicación web para la gestión de películas, desarrollada inicialmente en el curso de Frameworks y Backend. Se ha ampliado y mejorado con nuevas funcionalidades y la integración de microservicios, reforzando el aprendizaje sobre arquitecturas distribuidas y comunicación entre servicios, similar a Filmaffinity."
+		},
+		"p4": {
+			"name": "Proyecto MovieCards: Desacoplamiento de Servicio y Mejora de Calidad ",
+			"description": "Este proyecto se enfoca en la refactorización y modernización de una aplicación existente, MovieCards, transformando un servicio previamente integrado en una solución independiente y desplegable en la nube. El objetivo principal es establecer una arquitectura más flexible y escalable basada en microservicios, permitiendo que la funcionalidad central sea consumida por diversas plataformas (web, móvil, escritorio) de forma desacoplada."
 		}
 	},
 	"contact": {
@@ -69,42 +73,42 @@
 		"expert": "Experto",
 		"native": "Nativo",
 		"technical": {
-            "frontend": "Desarrollo Frontend",
-            "backend": "Desarrollo Backend",
-            "database": "Bases de Datos",
-            "devops": "DevOps",
-            "mobile": "Desarrollo Móvil",
-            "uiux": "Diseño UI/UX",
-            "web": "Desarrollo Web",
-            "security": "Ciberseguridad",
-            "scrum": "Metodologías Ágiles (Scrum)",
-            "container": "Contenedores (Docker, Kubernetes)",
-            "network": "Redes y Sistemas"
-        },
+			"frontend": "Desarrollo Frontend",
+			"backend": "Desarrollo Backend",
+			"database": "Bases de Datos",
+			"devops": "DevOps",
+			"mobile": "Desarrollo Móvil",
+			"uiux": "Diseño UI/UX",
+			"web": "Desarrollo Web",
+			"security": "Ciberseguridad",
+			"scrum": "Metodologías Ágiles (Scrum)",
+			"container": "Contenedores (Docker, Kubernetes)",
+			"network": "Redes y Sistemas"
+		},
 		"languages": {
 			"spanish": "Español",
 			"english": "Inglés",
 			"french": "Francés"
 		},
 		"soft": {
-        "teamwork": "Trabajo en equipo",
-        "problemSolving": "Resolución de problemas",
-        "adaptability": "Adaptabilidad",
-        "proactivity": "Proactividad e Iniciativa",
-        "organization": "Organización y Planificación",
-        "continuousLearning": "Disposición al Aprendizaje Continuo",
-        "communication": "Comunicación Efectiva",
-        "resilience": "Resiliencia",
-        "selfAwareness": "Autoconciencia"
-    },
+			"teamwork": "Trabajo en equipo",
+			"problemSolving": "Resolución de problemas",
+			"adaptability": "Adaptabilidad",
+			"proactivity": "Proactividad e Iniciativa",
+			"organization": "Organización y Planificación",
+			"continuousLearning": "Disposición al Aprendizaje Continuo",
+			"communication": "Comunicación Efectiva",
+			"resilience": "Resiliencia",
+			"selfAwareness": "Autoconciencia"
+		},
 		"hobbies": {
-        "readingBooks": "Lectura de libros",
-        "readingComicsManga": "Lectura de cómics y manga",
-        "playingPiano": "Tocar el piano",
-        "listeningMedia": "Escucha de podcasts y audiolibros",
-        "watchingMedia": "Cine y series",
-        "gaming": "Videojuegos"
-    }
+			"readingBooks": "Lectura de libros",
+			"readingComicsManga": "Lectura de cómics y manga",
+			"playingPiano": "Tocar el piano",
+			"listeningMedia": "Escucha de podcasts y audiolibros",
+			"watchingMedia": "Cine y series",
+			"gaming": "Videojuegos"
+		}
 	},
 	"timeline": {
 		"gap": "Brecha de {n} año{s}",

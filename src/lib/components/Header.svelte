@@ -30,7 +30,7 @@
 	import { theme, toggleTheme } from '$lib/stores/theme';
 
 	// Importación de iconos de Lucide Svelte para una interfaz visualmente rica.
-	import { Moon, Sun, Globe, Menu, X } from '@lucide/svelte';
+	import { Moon, Sun, Globe, Menu, X, BriefcaseBusiness  } from '@lucide/svelte';
 
 	/**
 	 * @type {boolean} mobileMenuOpen - Variable de estado que controla la visibilidad del menú móvil.
@@ -113,9 +113,10 @@
 		<!-- Enlace del logo/título del portafolio, que lleva a la página de inicio localizada -->
 		<a
 			href={localizeHref('/', { locale: currentLocale })}
-			class="text-xl font-bold text-gray-900 dark:text-white"
+			class="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white"
 		>
-			Portfolio
+		 <BriefcaseBusiness class="w-6 h-6 flex-shrink-0" />
+			Portafolio
 		</a>
 
 		<!-- Navegación principal para pantallas medianas y grandes (oculta en móviles) -->

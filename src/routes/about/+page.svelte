@@ -14,7 +14,7 @@
 	import { fly, fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	// Store de SvelteKit para acceder a datos de la página (e.g., idioma).
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
 	// Importación de datos del portafolio (información personal, habilidades, experiencia, etc.).
 	import {
@@ -36,7 +36,7 @@
 	 * @type {string} lang - Idioma actual de la página, obtenido de los datos de SvelteKit
 	 * o por defecto 'es'. Utilizado para seleccionar textos traducidos directamente de `personalInfo`.
 	 */
-	const lang = $page.data.paraglide?.lang || 'es';
+	const lang = page.data.paraglide?.lang || 'es';
 
 	/**
 	 * Función utilitaria para obtener un mensaje traducido de Paraglide.js.

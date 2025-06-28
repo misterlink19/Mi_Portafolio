@@ -11,6 +11,8 @@ export const personalInfo = {
 	photo: '/images/Amle.png',
 	email: 'amlemartinezmarte@gmail.com',
 	location: 'Alcalá de Henares, España',
+	github: 'https://github.com/misterlink19',
+	linkedin: 'https://www.linkedin.com/in/amle-martinez-marte-15a433208/',
 	summary: {
 		es: 'Desarrollador Backend Junior con base sólida en Java y Python. Actualmente curso un Máster en Desarrollo Ágil de Software en la Universidad de Alcalá, con proyectos aplicando Spring Boot, CI/CD y microservicios. Experiencia previa en soporte técnico con foco en automatización de tareas y mejora de procesos. Orientado al aprendizaje continuo y al trabajo en equipo',
 		en: 'Junior Backend Developer with a solid foundation in Java and Python. Currently pursuing a Master in Agile Software Development at the University of Alcalá, with projects applying Spring Boot, CI/CD and microservices. Previous experience in technical support with focus on task automation and process improvement. Oriented to continuous learning and teamwork.'
@@ -91,40 +93,78 @@ export const education = [
 // Proyectos destacados
 export const projects = [
 	{
-		id: 'ecommerce-platform', // Usa un ID basado en el nombre del proyecto
+		id: 'viaje-confort-react',
 		nameKey: 'projects.p1.name',
 		descriptionKey: 'projects.p1.description',
 		images: [
-			'/images/projects/ecommerce-1.png', // Ruta de la primera imagen
-			'/images/projects/ecommerce-2.png' // Ruta de la segunda imagen (si existe)
-			// Agrega más rutas de imágenes según necesites
+			'/projects/p1-1.png',
+			'/projects/p1-2.png',
+			'/projects/p1-3.png',
+			'/projects/p1-4.png'
 		],
-		technologies: ['SvelteKit', 'TypeScript', 'Tailwind CSS', 'Stripe'],
-		liveUrl: 'https://ejemplo-ecommerce.com', // Cambia a tu URL real
-		githubUrl: 'https://github.com/usuario/ecommerce-repo', // Cambia a tu URL real
-		date: '2024-01-15'
+		technologies: ['React', 'JavaScript ', 'HTML5', 'CSS3', 'Bootstrap'],
+		liveUrl: null,
+		githubUrl: 'https://github.com/misterlink19/Proyecto-Viajes-Confort-React',
+		date: '2025-05-24'
 	},
 	{
-		id: 'task-management-app',
+		id: 'Portal-F1',
 		nameKey: 'projects.p2.name',
 		descriptionKey: 'projects.p2.description',
 		images: [
-			'/images/projects/taskapp-1.png' // Una sola imagen para este proyecto
+			'/projects/p2-1.png',
+			'/projects/p2-2.png',
+			'/projects/p2-3.png' // Una sola imagen para este proyecto
 		],
-		technologies: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
+		technologies: [
+			'Spring Boot (versión 3.3.4)',
+			'Base de Datos SQL (MySQL)',
+			'Hibernate JPA',
+			'Lombok',
+			'Thymeleaf',
+			'Mockito',
+			'FullCalendar',
+			'reCAPTCHA de Google'
+		],
 		liveUrl: null, // Puedes dejarlo null si no hay demo en vivo
-		githubUrl: 'https://github.com/usuario/taskapp-repo', // Cambia a tu URL real
-		date: '2023-11-20'
+		githubUrl: 'https://github.com/misterlink19/Portal-Formula-1', // Cambia a tu URL real
+		date: '2025-04-20'
 	},
 	{
-		id: 'old-portfolio-v1', // Ejemplo de proyecto sin imágenes
+		id: 'portal-peliculas-5mc',
 		nameKey: 'projects.p3.name',
 		descriptionKey: 'projects.p3.description',
-		images: [], // Array vacío para indicar que no hay imágenes
-		technologies: ['HTML', 'CSS', 'JavaScript'],
-		liveUrl: 'https://old-portfolio.example.com',
-		githubUrl: 'https://github.com/usuario/old-portfolio-repo',
-		date: '2022-05-10'
+		images: ['/projects/p3-1.png', '/projects/p3-2.png', '/projects/p3-3.png'],
+		technologies: [
+			'Spring Boot',
+			'JPA (Hibernate)',
+			'MySQL',
+			'Thymeleaf',
+			'Eureka Server',
+			'Spring Cloud Gateway',
+			'Spring Security'
+		],
+		liveUrl: null,
+		githubUrl: 'https://github.com/misterlink19/Proyecto-Portal-Peliculas-5-Microservicios',
+		date: '2024-04-16'
+	},
+	{
+		id: 'portal-peliculas-desplegada',
+		nameKey: 'projects.p4.name',
+		descriptionKey: 'projects.p4.description',
+		images: ['/projects/p4-1.png'],
+		technologies: [
+			'Spring Boot',
+			'RestTemplate',
+			'Thymeleaf',
+			'Microsoft Azure',
+			'GitHub Actions',
+			'SonarQube',
+			'JUnit'
+		],
+		liveUrl: "https://moviecards-martinez.azurewebsites.net/",
+		githubUrl: 'https://github.com/misterlink19/Proyecto-Portal-Peliculas-5-Microservicios',
+		date: '2025-02-15'
 	}
 	// Añade más proyectos aquí siguiendo la misma estructura
 ];

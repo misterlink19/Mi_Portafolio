@@ -16,7 +16,7 @@
 	// Librería de mensajes de Paraglide.js para internacionalización.
 	import * as m from '$lib/paraglide/messages';
 	// Iconos de Lucide Svelte.
-	import { Mail, MapPin, Send } from '@lucide/svelte';
+	import { Mail, MapPin, Send, Linkedin, Github } from '@lucide/svelte';
 
 	// --- Variables de Estado Reactivas ---
 	/**
@@ -198,6 +198,45 @@
 											{m['contact.locationTitle']()}
 										</h3>
 										<p class="text-gray-600 dark:text-gray-400">{personalInfo.location}</p>
+									</div>
+								</div>
+								<!-- GitHub -->
+								<div
+									class="flex items-center space-x-4 hover:scale-105 transition-transform duration-200"
+									transition:fly={{ x: -20, duration: 400, delay: 300, easing: quintOut }}
+								>
+									<div class="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
+										<Github class="w-6 h-6 text-gray-600 dark:text-gray-400" />
+									</div>
+									<div>
+										<a
+											href="https://github.com/misterlink19"
+											target="_blank"
+											rel="noopener"
+											class="font-semibold text-gray-900 dark:text-white hover:underline"
+										>
+											GitHub
+										</a>
+									</div>
+								</div>
+
+								<!-- LinkedIn -->
+								<div
+									class="flex items-center space-x-4 hover:scale-105 transition-transform duration-200"
+									transition:fly={{ x: -20, duration: 400, delay: 400, easing: quintOut }}
+								>
+									<div class="p-3 bg-blue-50 dark:bg-blue-900 rounded-lg">
+										<Linkedin class="w-6 h-6 text-blue-600 dark:text-blue-400" />
+									</div>
+									<div>
+										<a
+											href="https://www.linkedin.com/in/amle-martinez-marte-15a433208/"
+											target="_blank"
+											rel="noopener"
+											class="font-semibold text-gray-900 dark:text-white hover:underline"
+										>
+											LinkedIn
+										</a>
 									</div>
 								</div>
 							</div>

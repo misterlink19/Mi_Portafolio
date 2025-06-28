@@ -22,19 +22,23 @@
         "viewCode": "View Code",
         "technologiesUsed": "Technologies used",
         "p1": {
-            "name": "E-commerce Platform",
-            "description": "A full-featured platform with shopping cart, product management, user authentication, and payment gateway. Built for scalability and user experience."
+            "name": "Travel Comfort Project",
+            "description": "Travel Comfort Project is an online store specializing in suitcases and luggage. The application allows users to browse products, manage a shopping cart, and optionally access an administrative panel for inventory maintenance."
         },
         "p2": {
-            "name": "Task Management App",
-            "description": "A real-time collaborative app for teams with task assignment, progress tracking, and notifications. Optimized for high performance."
+            "name": "Formula 1 Portal",
+            "description": "Web application for managing a Formula 1 portal, allowing fans to access news and polls, teams to perform performance calculations, and administrators to manage site content and users."
+        },
+        "p3": {
+            "name": "Movie Management with Microservices",
+            "description": "This project is the evolution of a web application for movie management, initially developed during a Frameworks and Backend course. It has been expanded and improved with new functionalities and microservices integration, reinforcing learning about distributed architectures and service communication, similar to Filmaffinity."
+        },
+        "p4": {
+            "name": "MovieCards Project: Service Decoupling and Quality Improvement",
+            "description": "This project focuses on refactoring and modernizing an existing application, MovieCards, by transforming a previously integrated service into an independent, cloud-deployable solution. The main objective is to establish a more flexible and scalable microservices-based architecture, allowing core functionality to be consumed by various platforms (web, mobile, desktop) in a decoupled manner."
         },
         "subtitle": "Projects ordered chronologically, from newest to oldest",
-        "noImage": "No image available",
-        "p3": {
-            "name": "My Old Portfolio (V1)",
-            "description": "An earlier version of my personal portfolio, built with basic web development technologies."
-        }
+        "noImage": "No image available"
     },
     "contact": {
         "title": "Contact",
@@ -68,43 +72,43 @@
         "advanced": "Advanced",
         "expert": "Expert",
         "native": "Native",
-       "technical": {
-        "frontend": "Frontend Development",
-        "backend": "Backend Development",
-        "database": "Databases",
-        "devops": "DevOps",
-        "mobile": "Mobile Development",
-        "uiux": "UI/UX Design",
-        "web": "Web Development",
-        "security": "Cybersecurity",
-        "scrum": "Agile Methodologies (Scrum)",
-        "container": "Containers (Docker, Kubernetes)",
-        "network": "Networks and Systems"
-    },
+        "technical": {
+            "frontend": "Frontend Development",
+            "backend": "Backend Development",
+            "database": "Databases",
+            "devops": "DevOps",
+            "mobile": "Mobile Development",
+            "uiux": "UI/UX Design",
+            "web": "Web Development",
+            "security": "Cybersecurity",
+            "scrum": "Agile Methodologies (Scrum)",
+            "container": "Containers (Docker, Kubernetes)",
+            "network": "Networks and Systems"
+        },
         "languages": {
             "spanish": "Spanish",
             "english": "English",
             "french": "French"
         },
         "soft": {
-        "teamwork": "Teamwork",
-        "problemSolving": "Problem Solving",
-        "adaptability": "Adaptability",
-        "proactivity": "Proactivity & Initiative",
-        "organization": "Organization & Planning",
-        "continuousLearning": "Continuous Learning",
-        "communication": "Effective Communication",
-        "resilience": "Resilience",
-        "selfAwareness": "Self-awareness"
-    },
-       "hobbies": {
-        "readingBooks": "Book Reading",
-        "readingComicsManga": "Comics & Manga Reading",
-        "playingPiano": "Playing Piano",
-        "listeningMedia": "Podcasts & Audiobooks",
-        "watchingMedia": "Movies & TV Series",
-        "gaming": "Gaming"
-    }
+            "teamwork": "Teamwork",
+            "problemSolving": "Problem Solving",
+            "adaptability": "Adaptability",
+            "proactivity": "Proactivity & Initiative",
+            "organization": "Organization & Planning",
+            "continuousLearning": "Continuous Learning",
+            "communication": "Effective Communication",
+            "resilience": "Resilience",
+            "selfAwareness": "Self-awareness"
+        },
+        "hobbies": {
+            "readingBooks": "Book Reading",
+            "readingComicsManga": "Comics & Manga Reading",
+            "playingPiano": "Playing Piano",
+            "listeningMedia": "Podcasts & Audiobooks",
+            "watchingMedia": "Movies & TV Series",
+            "gaming": "Gaming"
+        }
     },
     "timeline": {
         "gap": "Gap of {n} year{s}",

@@ -1,28 +1,24 @@
+<!-- src/lib/components/Footer.svelte -->
 <script lang="ts">
   /**
    * Footer.svelte
-   * Pie de página con:
-   * - Navegación
-   * - Contacto
-   * - Tecnologías usadas (solo SvelteKit, Tailwind CSS y Paraglide.js)
-   * - Soporte i18n con Paraglide.js
    */
 
-  // 1) Paraglide.js: mensajes y runtime
+  // i18n
   import * as m from '$lib/paraglide/messages';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { getLocale } from '$lib/paraglide/runtime';
 
-  // 2) Datos personales y logos de todas las tecnologías
-  import { personalInfo, technologies } from '$lib/data/portfolio.js';
+  // Datos de usuario y tecnologías
+  import { personalInfo } from '$lib/data/portfolio.js';
 
-  // 3) Iconos estándar
-  import { Mail, MapPin } from '@lucide/svelte';
+  // Iconos
+  import { Mail, MapPin, Linkedin, Github } from '@lucide/svelte';
 
-  // 4) Locale reactive (SSR-friendly)
-  $: currentLocale = $page.data.paraglide?.lang || getLocale();
+  // Reactividad SSR-friendly
+  $: currentLocale = page.data.paraglide?.lang || getLocale();
 
-  // 5) Items de navegación
+  // Navegación
   const navItems = [
     { href: '/',         label: m['nav.home']    },
     { href: '/about',    label: m['nav.about']   },
@@ -30,21 +26,22 @@
     { href: '/contact',  label: m['nav.contact'] }
   ];
 
-  // 6) Tecnologías que realmente mostramos en el footer
-  //    Sólo SvelteKit, Tailwind CSS y Paraglide.js
+  // Tecnologías con logo y enlace
   const usedTech = [
     {
       name: 'SvelteKit',
-      logo: technologies.find(t => t.name.includes('Svelte'))?.logo
+      logo: '/icons/svelte.svg',
+      link: 'https://kit.svelte.dev/'
     },
     {
       name: 'Tailwind CSS',
-      logo: technologies.find(t => t.name.includes('Tailwind'))?.logo
+      logo: '/icons/tailwind.svg',
+      link: 'https://tailwindcss.com/docs/installation/framework-guides/sveltekit'
     },
     {
       name: 'Paraglide.js',
-      // Asumimos que tienes un SVG en /icons/paraglide.svg
-      logo: '/icons/paraglide.svg'
+      logo: '/icons/paraglide.svg', 
+      link: 'https://inlang.com/m/gerre34r/library-inlang-paraglideJs'
     }
   ];
 </script>
@@ -55,30 +52,28 @@
 
       <!-- 1. Navegación -->
       <div>
-        {#key currentLocale}
-          <h3 class="font-semibold text-gray-900 dark:text-white mb-4">
-            {m['nav.home']()}
-          </h3>
-        {/key}
+        <h3 class="font-semibold text-gray-900 dark:text-white mb-4">
+          {m['nav.home']()}
+        </h3>
         <nav class="space-y-2">
           {#each navItems as item}
             <a
               href={item.href}
-              class="block text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              class="block text-gray-600 dark:text-gray-400
+                     hover:text-blue-600 dark:hover:text-blue-400
+                     transition-colors"
             >
-              {#key currentLocale}{item.label()}{/key}
+              {item.label()}
             </a>
           {/each}
         </nav>
       </div>
 
-      <!-- 2. Contacto -->
+      <!-- 2. Contacto + RRSS -->
       <div>
-        {#key currentLocale}
-          <h3 class="font-semibold text-gray-900 dark:text-white mb-4">
-            {m['contact.title']()}
-          </h3>
-        {/key}
+        <h3 class="font-semibold text-gray-900 dark:text-white mb-4">
+          {m['contact.title']()}
+        </h3>
         <div class="space-y-2">
           <div class="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
             <Mail class="w-6 h-6 flex-shrink-0" />
@@ -88,36 +83,67 @@
             <MapPin class="w-6 h-6 flex-shrink-0" />
             <span>{personalInfo.location}</span>
           </div>
+          <div class="flex items-center space-x-4 mt-2">
+            <!-- GitHub -->
+            <a
+              href="https://github.com/misterlink19"
+              target="_blank"
+              rel="noopener"
+              class="text-gray-600 dark:text-gray-400
+                     hover:text-gray-900 dark:hover:text-white
+                     transition-colors"
+            >
+              <Github
+                class="w-6 h-6 transition-transform transform
+                       hover:scale-110"
+              />
+            </a>
+
+            <!-- LinkedIn -->
+            <a
+              href="https://www.linkedin.com/in/amle-martinez-marte-15a433208/"
+              target="_blank"
+              rel="noopener"
+              class="text-gray-600 dark:text-gray-400
+                     hover:text-blue-700 dark:hover:text-blue-300
+                     transition-colors"
+            >
+              <Linkedin
+                class="w-6 h-6 transition-transform transform
+                       hover:scale-110"
+              />
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- 3. Tecnología -->
+      <!-- 3. Tecnología usada -->
       <div>
-        {#key currentLocale}
-          <h3 class="font-semibold text-gray-900 dark:text-white mb-4">
-            Tecnología
-          </h3>
-        {/key}
+        <h3 class="font-semibold text-gray-900 dark:text-white mb-4">
+          Tecnología
+        </h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+          {m['footer.builtWith']()}
+        </p>
 
-        {#key currentLocale}
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
-            {m['footer.builtWith']()}
-          </p>
-        {/key}
-
-        <!-- Solo los logos de SvelteKit, Tailwind CSS y Paraglide.js -->
         <div class="flex items-center space-x-6">
           {#each usedTech as tech}
-            {#if tech.logo}
-              <div class="flex flex-col items-center text-gray-600 dark:text-gray-400">
-                <img
-                  src={tech.logo}
-                  alt={tech.name + ' logo'}
-                  class="w-8 h-8 mb-1"
-                />
-                <span class="text-xs">{tech.name}</span>
-              </div>
-            {/if}
+            <a
+              href={tech.link}
+              target="_blank"
+              rel="noopener"
+              class="flex flex-col items-center
+                     text-gray-600 dark:text-gray-400
+                     group"
+            >
+              <img
+                src={tech.logo}
+                alt="{tech.name} logo"
+                class="w-8 h-8 mb-1 transition-transform transform
+                       group-hover:scale-110"
+              />
+              <span class="text-xs">{tech.name}</span>
+            </a>
           {/each}
         </div>
       </div>
@@ -126,11 +152,10 @@
 
     <!-- Derechos de autor -->
     <div
-      class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center text-gray-600 dark:text-gray-400"
+      class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700
+             text-center text-gray-600 dark:text-gray-400"
     >
-      {#key currentLocale}
-        <p>{m['footer.copyright']()}</p>
-      {/key}
+      <p>{m['footer.copyright']()}</p>
     </div>
   </div>
 </footer>

@@ -6,7 +6,7 @@
 	 * - Transiciones `fade` y `fly`
 	 */
 
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import * as m from '$lib/paraglide/messages';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -18,7 +18,7 @@
 
 	// 1) Calcula el locale actual extrayendo la primera parte de la ruta:
 	//    /en/... → 'en', /es/... → 'es', si no hay prefijo → 'es'
-	$: segments = $page.url.pathname.split('/');
+	$: segments = page.url.pathname.split('/');
 	$: currentLocale = segments[1] || 'es';
 
 	// 2) Navega a “About” manteniendo locale
