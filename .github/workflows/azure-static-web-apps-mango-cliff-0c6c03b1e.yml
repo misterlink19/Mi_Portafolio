@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x' # Puedes probar con '20.x' si 18.x sigue dando problemas
+            node-version: '24.x'
 
       # PASO 2: Construir la aplicación (¡NUEVO! Con comandos directos)
       # Aquí ejecutamos npm install y npm run build directamente en el runner de GitHub Actions.
