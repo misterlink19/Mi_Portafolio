@@ -20,14 +20,11 @@ jobs:
           submodules: true
           lfs: false
 
-      # PASO 1: Configurar Node.js (se mantiene)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-            node-version: '24.x'
+          node-version: '24.x' # Usamos la última versión de Node.js
 
-      # PASO 2: Construir la aplicación (¡NUEVO! Con comandos directos)
-      # Aquí ejecutamos npm install y npm run build directamente en el runner de GitHub Actions.
       - name: Build SvelteKit App
         run: |
           echo "Ejecutando npm install..."
@@ -35,12 +32,9 @@ jobs:
           echo "Ejecutando npm run build..."
           npm run build
         env:
-          NODE_OPTIONS: "--openssl-legacy-provider" # Mantenemos esto por si ayuda con el problema de 'crypto'
-          ORYX_DEBUG_MODE: "true" # Mantenemos esto para depuración extra si es necesario
+          NODE_OPTIONS: "--openssl-legacy-provider" # Mantenemos esto por si acaso, aunque con Node 24.x y Paraglide v2 debería ser menos crítico
+          ORYX_DEBUG_MODE: "true"
 
-      # PASO 3: Desplegar la aplicación (¡NUEVO! Solo despliegue)
-      # Este paso usará Azure/static-web-apps-deploy pero omitirá la fase de build,
-      # usando los archivos generados en el paso anterior.
       - name: Deploy Static Web App
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -48,20 +42,8 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_CLIFF_0C6C03B1E }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/" # Ruta donde está tu código fuente de la app
-          api_location: "/" # Ruta de tu API (si tienes, si no déjalo así)
-          output_location: "build" # ¡Importante! Directorio de salida de tu build estático (generado por SvelteKit)
-          skip_app_build: true # ¡ESTO ES CLAVE! Le dice a Azure que no use Oryx para el build de la app
-          # skip_api_build: true # Puedes añadir esto si no tienes funciones de API
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_CLIFF_0C6C03B1E }}
-          action: "close"
+          app_location: "build" # <--- ¡CAMBIO CRÍTICO AQUÍ!
+          api_location: "/"
+          output_location: "build" # Esta variable no es tan relevante cuando skip_app_build: true
+          skip_app_build: true
+          # skip_api_build: true
