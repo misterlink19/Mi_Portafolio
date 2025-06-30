@@ -18,29 +18,41 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-          lfs:
-            false
-            # --- Para configurar Node.js ---
+          lfs: false
+
+      # PASO 1: Configurar Node.js (se mantiene)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
-      - name: Build And Deploy
+          node-version: '18.x' # Puedes probar con '20.x' si 18.x sigue dando problemas
+
+      # PASO 2: Construir la aplicación (¡NUEVO! Con comandos directos)
+      # Aquí ejecutamos npm install y npm run build directamente en el runner de GitHub Actions.
+      - name: Build SvelteKit App
+        run: |
+          echo "Ejecutando npm install..."
+          npm install
+          echo "Ejecutando npm run build..."
+          npm run build
+        env:
+          NODE_OPTIONS: "--openssl-legacy-provider" # Mantenemos esto por si ayuda con el problema de 'crypto'
+          ORYX_DEBUG_MODE: "true" # Mantenemos esto para depuración extra si es necesario
+
+      # PASO 3: Desplegar la aplicación (¡NUEVO! Solo despliegue)
+      # Este paso usará Azure/static-web-apps-deploy pero omitirá la fase de build,
+      # usando los archivos generados en el paso anterior.
+      - name: Deploy Static Web App
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_CLIFF_0C6C03B1E }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          action: 'upload'
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: '/' # App source code path
-          api_location: '/' # Api source code path - optional
-          output_location: 'build' # Built app content directory - optional
-        env: # <--- Añadir esta sección
-          NODE_OPTIONS: --openssl-legacy-provider
-          ORYX_DEBUG_MODE: true # <--- Añadir esta línea
-          ###### End of Repository/Build Configurations ######
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/" # Ruta donde está tu código fuente de la app
+          api_location: "/" # Ruta de tu API (si tienes, si no déjalo así)
+          output_location: "build" # ¡Importante! Directorio de salida de tu build estático (generado por SvelteKit)
+          skip_app_build: true # ¡ESTO ES CLAVE! Le dice a Azure que no use Oryx para el build de la app
+          # skip_api_build: true # Puedes añadir esto si no tienes funciones de API
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -52,4 +64,4 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_CLIFF_0C6C03B1E }}
-          action: 'close'
+          action: "close"
