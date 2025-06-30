@@ -153,6 +153,7 @@
                   <div class="flex flex-col sm:flex-row gap-4 mb-6">
                     {#if project.liveUrl}
                       <a
+                      data-sveltekit-preload-code="viewport"
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -163,6 +164,7 @@
                       </a>
                     {/if}
                     <a
+                    data-sveltekit-preload-code="viewport"
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
