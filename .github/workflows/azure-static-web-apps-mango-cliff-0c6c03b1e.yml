@@ -29,7 +29,7 @@ jobs:
     # Configuración del entorno de despliegue para reportar la URL en GitHub Actions.
     environment:
       name: 'Production' # Nombre del entorno de despliegue.
-      url: ${{ steps.deploy_to_swa.outputs.static_web_apps_url }} # URL obtenida del paso de despliegue.
+      url: https://mango-cliff-0c6c03b1e.2.azurestaticapps.net # URL obtenida de azure
 
     # Pasos a ejecutar en este trabajo.
     steps:
