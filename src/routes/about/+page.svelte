@@ -183,7 +183,7 @@
 								{personalInfo.title}
 							</h2>
 							<!-- CV personal (traducido) -->
-							<p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
+							<p class="text-lg text-justify text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
 								{m['home.CV']()}
 							</p>
 							<!-- Información de contacto básica (email y ubicación) -->

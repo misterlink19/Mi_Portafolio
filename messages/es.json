@@ -11,10 +11,10 @@
 	"home": {
 		"welcome": "¡Bienvenido!",
 		"title": "Desarrollador Full Stack",
-		"summary": "Soy un desarrollador apasionado por crear soluciones web modernas y eficientes. Me especializo en tecnologías como JavaScript, Python y frameworks modernos.",
+		"summary": "Desarrollador Backend Junior con fundamentos sólidos en Java y Python. Actualmente formándome en un Máster en Desarrollo Ágil de Software en la Universidad de Alcalá, donde participo en proyectos con Spring Boot, microservicios y CI/CD. Comprometido con el aprendizaje continuo y orientado al trabajo colaborativo.",
 		"greeting": "¡Hola! Soy Amle Martinez Marte.",
 		"learnMore": "Conoce más sobre mí",
-		"CV": "Desarrollador Backend Junior con base sólida en Java y Python. Actualmente curso un Máster en Desarrollo Ágil de Software en la Universidad de Alcalá, con proyectos aplicando Spring Boot, CI/CD y microservicios. Experiencia previa en soporte técnico con foco en automatización de tareas y mejora de procesos. Orientado al aprendizaje continuo y al trabajo en equipo"
+		"CV": "Graduado Magna Cum Laude en Informática y cursando un Máster en Desarrollo Ágil de Software en la Universidad de Alcalá. Domino Java, Python y Spring Boot, con experiencia en microservicios escalables y pipelines CI/CD para despliegues fiables. En soporte técnico, automatizé procesos con Python, reduciendo errores un 40 % y optimizando la logística de flotas. Me caracterizo por colaborar en equipos multidisciplinares, garantizar la calidad de código mediante testing y aplicar principios de ciberseguridad. Adaptable y proactivo, comparto conocimientos y exploro tendencias en música, cómics y nuevas tecnologías."
 	},
 	"projects": {
 		"title": "Mis Proyectos",

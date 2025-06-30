@@ -106,40 +106,58 @@
 	}
 
 	/**
-	 * Maneja el envío del formulario.
-	 * Previene el comportamiento por defecto, valida los campos, simula un envío
-	 * asíncrono y muestra un mensaje de éxito.
-	 * @param {Event} event - El evento de envío del formulario.
-	 */
-	async function handleSubmit(event: Event) {
-		event.preventDefault(); // Evita la recarga de la página
+ * Maneja el envío del formulario.
+ * Previene el comportamiento por defecto, valida los campos, envía los datos
+ * a Web3Forms mediante una petición POST y muestra un mensaje de éxito si todo sale bien.
+ * @param {Event} event - El evento de envío del formulario.
+ */
+async function handleSubmit(event: Event) {
+    event.preventDefault(); // Evita la recarga de la página
 
-		if (!validateForm()) {
-			return; // Detiene el envío si la validación falla
-		}
+    if (!validateForm()) {
+        return; // Detiene el envío si la validación falla
+    }
 
-		isSubmitting = true; // Activa el estado de envío
+    isSubmitting = true; // Activa el estado de envío
 
-		try {
-			await new Promise((resolve) => setTimeout(resolve, 1000)); // Simula un retraso de red
+    try {
+        // Llamada a la API de Web3Forms con los datos del formulario
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                access_key: 'a13184c3-850f-48aa-911e-2890e181b423', 
+                name: formData.name,
+                email: formData.email,
+                message: formData.message
+            })
+        });
 
-			// Restablece el formulario y muestra el mensaje de éxito
-			formData = { name: '', email: '', message: '' };
-			errors = {}; // Limpia cualquier error anterior
-			showSuccess = true;
+        if (response.ok) {
+            // Restablece el formulario y muestra el mensaje de éxito
+            formData = { name: '', email: '', message: '' };
+            errors = {}; // Limpia cualquier error anterior
+            showSuccess = true;
 
-			// Oculta el mensaje de éxito después de 5 segundos
-			setTimeout(() => {
-				showSuccess = false;
-			}, 5000);
-		} catch (error) {
-			console.error('Error al enviar el formulario:', error);
-			// Si hubiera un error real de backend, podrías mostrarlo al usuario
-			// errors = { general: m['contact.errorMessage']() };
-		} finally {
-			isSubmitting = false; // Desactiva el estado de envío
-		}
-	}
+            // Oculta el mensaje de éxito después de 5 segundos
+            setTimeout(() => {
+                showSuccess = false;
+            }, 5000);
+        } else {
+            // Error si la API respondió con código diferente a 200
+            errors.general = m['contact.errorMessage']?.() ?? 'Error al enviar el mensaje.';
+        }
+    } catch (error) {
+        console.error('Error al enviar el formulario:', error);
+        // Si hay un error de red u otro inesperado
+        errors.general = m['contact.errorMessage']?.() ?? 'Algo salió mal. Intenta más tarde.';
+    } finally {
+        isSubmitting = false; // Desactiva el estado de envío
+    }
+}
+
 </script>
 
 <svelte:head>
