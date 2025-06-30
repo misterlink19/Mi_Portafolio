@@ -166,7 +166,7 @@
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="flex items-center justify-center px-6 py-3 bg-gray-800 hover:bg-gray-900 text-white rounded-lg transition-all duration-300 font-medium hover:scale-105 hover:shadow-lg"
+                      class="flex items-center justify-center px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all duration-300 font-medium hover:scale-105 hover:shadow-lg"
                     >
                       <Github class="w-5 h-5 mr-2" />
                       {m['projects.viewCode']()}

@@ -88,6 +88,7 @@
             <a
               href="https://github.com/misterlink19"
               target="_blank"
+              aria-label="Enlace a github"
               rel="noopener"
               class="text-gray-600 dark:text-gray-400
                      hover:text-gray-900 dark:hover:text-white
@@ -104,9 +105,11 @@
               href="https://www.linkedin.com/in/amle-martinez-marte-15a433208/"
               target="_blank"
               rel="noopener"
+              aria-label="Enlace a linkedin"
               class="text-gray-600 dark:text-gray-400
                      hover:text-blue-700 dark:hover:text-blue-300
                      transition-colors"
+
             >
               <Linkedin
                 class="w-6 h-6 transition-transform transform

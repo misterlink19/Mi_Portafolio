@@ -257,7 +257,7 @@
 	<!-- Sección de Experiencia Laboral -->
 	<section class="mb-16">
 		<h2
-			class="text-4xl font-bold text-gray-800 dark:text-white mb-8 text-center"
+			class="text-5xl font-bold text-gray-800 dark:text-white mb-8 text-center"
 			data-animate-id="work-experience-title"
 		>
 			{#if mounted && visibleElements.has('work-experience-title')}
@@ -275,7 +275,7 @@
 	<!-- Sección de Educación -->
 	<section class="mb-16">
 		<h2
-			class="text-4xl font-bold text-gray-800 dark:text-white mb-8 text-center"
+			class="text-5xl font-bold text-gray-800 dark:text-white mb-8 text-center"
 			data-animate-id="education-title"
 		>
 			{#if mounted && visibleElements.has('education-title')}
