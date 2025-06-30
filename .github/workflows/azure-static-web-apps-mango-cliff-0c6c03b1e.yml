@@ -1,50 +1,115 @@
-name: Azure Static Web Apps CI/CD
+# Nombre del workflow, visible en la interfaz de GitHub Actions.
+name: Azure Static Web Apps CI/CD for SvelteKit
 
+# Define los eventos que dispararán este workflow.
 on:
   push:
+    # Este workflow se ejecutará solo cuando se haga un push a la rama 'master'.
+    # Esto asegura que los despliegues de producción solo ocurran en cambios a la rama principal.
     branches:
       - master
   pull_request:
+    # Para Pull Requests, el workflow se ejecuta para validar los cambios antes de que se fusionen.
+    # No se desplegará a producción, pero se construirán los artefactos.
     types: [opened, synchronize, reopened, closed]
     branches:
       - master
 
+# Define los 'jobs' (trabajos) que componen este workflow.
 jobs:
   build_and_deploy_job:
+    # Este trabajo se ejecuta si el evento es un 'push' o si es un 'pull_request' que no ha sido cerrado.
+    # Esto previene despliegues a producción en PRs, pero permite que los PRs se construyan para validación.
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    
+    # El entorno en el que se ejecutará este trabajo. 'ubuntu-latest' es un entorno Linux.
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
+    
+    # Nombre descriptivo del trabajo.
+    name: Build and Deploy SvelteKit App
 
-      - name: Setup Node.js
+    # Pasos (steps) que se ejecutarán dentro de este trabajo.
+    steps:
+      # Paso 1: Descargar el código fuente del repositorio.
+      # Esto es necesario para que el runner tenga acceso a tus archivos.
+      - name: Checkout Repository Code
+        uses: actions/checkout@v3
+        with:
+          submodules: true # Clona submódulos si los tienes.
+          lfs: false       # No descarga archivos grandes LFS para acelerar el proceso.
+
+      # Paso 2: Configurar el entorno de Node.js.
+      # Instala la versión especificada de Node.js necesaria para tu proyecto.
+      - name: Setup Node.js Environment
         uses: actions/setup-node@v3
         with:
-          node-version: '24.x' # Usamos la última versión de Node.js
+          # Especifica la versión de Node.js. '24.x' usa la última versión de la serie 24.
+          # Esto es crucial para la compatibilidad con las últimas APIs de 'crypto' usadas por Paraglide.js.
+          node-version: '24.x'
 
-      - name: Build SvelteKit App
+      # Paso 3: Construir la aplicación SvelteKit.
+      # Este paso ejecuta los comandos de instalación de dependencias y compilación de tu aplicación.
+      - name: Build SvelteKit Application
         run: |
-          echo "Ejecutando npm install..."
-          npm install
-          echo "Ejecutando npm run build..."
-          npm run build
+          echo "Installing Node.js dependencies..."
+          npm install # Instala todas las dependencias del proyecto.
+          echo "Building SvelteKit project for production..."
+          npm run build # Ejecuta el script de build definido en tu package.json (e.g., svelte-kit sync && vite build).
         env:
-          NODE_OPTIONS: "--openssl-legacy-provider" # Mantenemos esto por si acaso
+          # Opciones de Node.js que pueden ser útiles para resolver problemas de compatibilidad.
+          # '--openssl-legacy-provider' puede ser necesario para módulos antiguos que usen versiones específicas de OpenSSL.
+          NODE_OPTIONS: "--openssl-legacy-provider"
+          # Activa el modo de depuración de Oryx (el motor de build de Azure) para logs más detallados.
           ORYX_DEBUG_MODE: "true"
 
-      - name: Deploy Static Web App
-        id: builddeploy
+      # Paso 4: Desplegar la aplicación estática en Azure Static Web Apps.
+      # Este paso utiliza la acción oficial de Azure para desplegar tu sitio.
+      - name: Deploy to Azure Static Web App
+        id: builddeploy # ID para referenciar los outputs de este paso (como la URL).
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          # Token de API para autenticación en Azure Static Web Apps.
+          # Se guarda como un secreto de GitHub para mayor seguridad.
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_CLIFF_0C6C03B1E }}
+          # Token de GitHub para interactuar con la API de GitHub (e.g., para comentarios en PRs).
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          # Indica la acción a realizar: 'upload' para desplegar los artefactos.
+          action: "upload"
+          # La ubicación de los archivos de la aplicación compilados y listos para servir.
+          # SvelteKit, usando 'adapter-static', genera estos archivos en la carpeta 'build'.
+          app_location: "build"
+          # La ubicación de tu código de API (Azure Functions). Vacío si no tienes una API separada.
+          api_location: ""
+          # Directorio de salida donde la acción esperaría encontrar los artefactos del build (si Oryx los hiciera).
+          # Menos relevante cuando 'skip_app_build' es true.
+          output_location: "build"
+          # ¡IMPORTANTE! Indica a Azure que omita su propio proceso de construcción de la aplicación (Oryx).
+          # Nosotros ya construimos la app en un paso anterior.
+          skip_app_build: true
+          # Descomenta la línea de abajo si no tienes ninguna Azure Function API en tu proyecto.
+          # skip_api_build: true
+
+      # Paso 5: Mostrar la URL de la aplicación desplegada (solo en push a master).
+      # Este paso se ejecutará solo después de un despliegue exitoso a la rama principal.
+      - name: Display Deployment URL
+        # Solo muestra la URL si el evento es un 'push' a la rama 'master'.
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          echo "¡Tu aplicación ha sido desplegada con éxito!"
+          echo "URL de la aplicación: ${{ steps.builddeploy.outputs.webapp_url }}"
+          # También puedes añadir un comentario en el PR o en la ejecución del workflow
+          # github-comment: ${{ steps.builddeploy.outputs.output_url }}
+
+  # Este trabajo se encarga de cerrar despliegues de Pull Request cuando el PR se cierra.
+  close_pull_request_job:
+    # Solo se ejecuta si el evento es un 'pull_request' y la acción es 'closed'.
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request Environment
+        id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_CLIFF_0C6C03B1E }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
-          # ¡¡¡ESTE ES EL CAMBIO CLAVE QUE DEBE ESTAR ALLÍ!!!
-          app_location: "build" # <--- ¡CAMBIA ESTO A "build"!
-          api_location: "" # <--- Vacía esto si no tienes una API.
-          output_location: "build" # Esta variable no es tan relevante cuando skip_app_build: true
-          skip_app_build: true
-          # skip_api_build: true # Puedes añadir esto si no tienes funciones de API
+          action: "close"
