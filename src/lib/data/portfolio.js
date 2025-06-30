@@ -32,7 +32,7 @@ export const technologies = [
 	{ name: 'Vue', logo: '/icons/vue.svg', level: 'skills.intermediate' },
 	{ name: 'Azure', logo: '/icons/azure.svg', level: 'skills.intermediate' },
 	{ name: 'Python', logo: '/icons/python.svg', level: 'skills.advanced' },
-	{ name: 'C++', logo: '/icons/C++.svg', level: 'skills.intermediate' },
+	{ name: 'C++', logo: '/icons/Cplusplus.svg', level: 'skills.intermediate' },
 	{ name: 'Git', logo: '/icons/git.svg', level: 'skills.intermediate' },
 	{ name: 'Spring boot', logo: '/icons/springboot.svg', level: 'skills.intermediate' },
 	{ name: 'Ionic', logo: '/icons/ionic.svg', level: 'skills.intermediate' },
