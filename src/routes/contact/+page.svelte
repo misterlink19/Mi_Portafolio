@@ -1,415 +1,185 @@
 <script lang="ts">
-	/**
-	 * Página de contacto del portafolio.
-	 *
-	 * Permite a los visitantes enviar un mensaje a través de un formulario
-	 * y muestra información de contacto alternativa. Incluye validación de formulario,
-	 * manejo de estado de envío y animaciones de entrada.
-	 */
+  // --- Core Svelte ---
+  // onMount: Para ejecutar código una vez que el componente se ha renderizado en el DOM.
+  import { onMount } from 'svelte';
+  // fly, fade: Transiciones para animar elementos al aparecer o desaparecer.
+  import { fly, fade } from 'svelte/transition';
+  // quintOut: Una función de easing para transiciones con un efecto de desaceleración.
+  import { quintOut } from 'svelte/easing';
 
-	// Importaciones de Svelte para ciclo de vida y transiciones.
-	import { onMount } from 'svelte';
-	import { fly, scale, fade } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
-	// Importación de datos personales para mostrar email y ubicación.
-	import { personalInfo } from '$lib/data/portfolio.js';
-	// Librería de mensajes de Paraglide.js para internacionalización.
-	import * as m from '$lib/paraglide/messages';
-	// Iconos de Lucide Svelte.
-	import { Mail, MapPin, Send, Linkedin, Github } from '@lucide/svelte';
+  // --- Datos Locales ---
+  // personalInfo: Contiene datos como el nombre y la ubicación del portfolio.
+  import { personalInfo } from '$lib/data/portfolio.js';
 
-	// --- Variables de Estado Reactivas ---
-	/**
-	 * @type {Set<string>} visibleElements - IDs de los elementos visibles en el viewport.
-	 * Controla las animaciones de entrada.
-	 */
-	let visibleElements = $state(new Set<string>());
-	/**
-	 * @type {boolean} mounted - Indica si el componente ya está montado en el DOM.
-	 * Utilizado para retrasar la activación de animaciones.
-	 */
-	let mounted = $state(false);
-	/**
-	 * @type {object} formData - Almacena los valores de los campos del formulario.
-	 */
-	let formData = $state({
-		name: '',
-		email: '',
-		message: ''
-	});
-	/**
-	 * @type {Record<string, string>} errors - Almacena los mensajes de error de validación por campo.
-	 */
-	let errors = $state<Record<string, string>>({});
-	/**
-	 * @type {boolean} isSubmitting - Indica si el formulario se está enviando.
-	 * Deshabilita el botón de envío y muestra un spinner.
-	 */
-	let isSubmitting = $state(false);
-	/**
-	 * @type {boolean} showSuccess - Indica si se debe mostrar el mensaje de éxito tras un envío.
-	 */
-	let showSuccess = $state(false);
+  // --- Internacionalización ---
+  // m: Objeto que contiene todos los mensajes traducidos de la aplicación (ej. títulos, descripciones).
+  import * as m from '$lib/paraglide/messages';
 
-	/**
-	 * Hook `onMount`: Se ejecuta cuando el componente se monta en el DOM.
-	 * Inicializa el IntersectionObserver para controlar las animaciones de entrada
-	 * de los elementos con el atributo `data-animate-id`.
-	 */
-	onMount(() => {
-	
-			mounted = true; // Componente montado, permite que las animaciones se activen
-			const observer = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							const id = (entry.target as HTMLElement).dataset.animateId;
-							if (id) {
-								visibleElements = new Set([...visibleElements, id]); // Añade el ID a los elementos visibles
-							}
-						}
-					});
-				},
-				{ threshold: 0.1, rootMargin: '50px' } // El elemento es visible cuando el 10% está en el viewport
-			);
+  // --- Iconos ---
+  // Iconos de Lucide Svelte, utilizados por el componente ContactInfoItem.
+  import { Mail, MapPin, Linkedin, Github } from '@lucide/svelte';
 
-			// Observa todos los elementos con `data-animate-id`
-			const elements = document.querySelectorAll('[data-animate-id]');
-			elements.forEach((el) => observer.observe(el));
+  // --- Componentes Reutilizables ---
+  // ContactInfoItem: Muestra un único punto de contacto (email, ubicación, etc.).
+  import ContactInfoItem from '$lib/components/ContactInfoItem.svelte';
+  // ContactForm: Encapsula toda la lógica y UI del formulario de contacto.
+  import ContactForm from '$lib/components/ContactForm.svelte';
 
-			return () => observer.disconnect(); // Limpia el observador al destruir el componente
-	});
+  // --- Variables de Estado Reactivas ($state) ---
+  // visibleElements: Un Set que guarda los `data-animate-id` de los elementos que están en el viewport.
+  // Permite activar animaciones solo cuando el usuario los ve.
+  let visibleElements = $state(new Set<string>());
+  // mounted: Un booleano que indica si el componente principal ya se ha montado en el DOM.
+  // Es útil para coordinar animaciones iniciales y evitar efectos visuales no deseados.
+  let mounted = $state(false);
 
-	/**
-	 * Valida los campos del formulario.
-	 * Actualiza la variable `errors` con los mensajes de error correspondientes.
-	 * @returns {boolean} `true` si el formulario es válido, `false` en caso contrario.
-	 */
-	function validateForm() {
-		const newErrors: Record<string, string> = {};
+  // --- Hook `onMount` ---
+  // Configura un IntersectionObserver para detectar cuándo los elementos con `data-animate-id`
+  // entran en el viewport, y así activar sus animaciones.
+  onMount(() => {
+    mounted = true; // El componente ya está listo, las animaciones iniciales pueden activarse.
 
-		if (!formData.name.trim()) {
-			newErrors.name = m['contact.nameRequired']();
-		}
-		if (!formData.email.trim()) {
-			newErrors.email = m['contact.emailRequired']();
-		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-			newErrors.email = m['contact.emailInvalid']();
-		}
-		if (!formData.message.trim()) {
-			newErrors.message = m['contact.messageRequired']();
-		}
-
-		errors = newErrors; // Actualiza el estado de errores
-		return Object.keys(newErrors).length === 0; // Retorna true si no hay errores
-	}
-
-	/**
- * Maneja el envío del formulario.
- * Previene el comportamiento por defecto, valida los campos, envía los datos
- * a Web3Forms mediante una petición POST y muestra un mensaje de éxito si todo sale bien.
- * @param {Event} event - El evento de envío del formulario.
- */
-async function handleSubmit(event: Event) {
-    event.preventDefault(); // Evita la recarga de la página
-
-    if (!validateForm()) {
-        return; // Detiene el envío si la validación falla
-    }
-
-    isSubmitting = true; // Activa el estado de envío
-
-    try {
-        // Llamada a la API de Web3Forms con los datos del formulario
-        const response = await fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                access_key: 'a13184c3-850f-48aa-911e-2890e181b423', 
-                name: formData.name,
-                email: formData.email,
-                message: formData.message
-            })
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = (entry.target as HTMLElement).dataset.animateId;
+            if (id) {
+              // Añade el ID del elemento visible al Set reactivo.
+              visibleElements = new Set([...visibleElements, id]);
+            }
+          }
         });
+      },
+      // Opciones del observador: El 10% del elemento debe estar visible para considerarse "intersecting".
+      // rootMargin añade un margen de 50px alrededor del viewport para una detección anticipada.
+      { threshold: 0.1, rootMargin: '50px' }
+    );
 
-        if (response.ok) {
-            // Restablece el formulario y muestra el mensaje de éxito
-            formData = { name: '', email: '', message: '' };
-            errors = {}; // Limpia cualquier error anterior
-            showSuccess = true;
+    // Observa todos los elementos en el DOM que tienen el atributo `data-animate-id`.
+    document.querySelectorAll('[data-animate-id]').forEach((el) => observer.observe(el));
 
-            // Oculta el mensaje de éxito después de 5 segundos
-            setTimeout(() => {
-                showSuccess = false;
-            }, 5000);
-        } else {
-            // Error si la API respondió con código diferente a 200
-            errors.general = m['contact.errorMessage']?.() ?? 'Error al enviar el mensaje.';
-        }
-    } catch (error) {
-        console.error('Error al enviar el formulario:', error);
-        // Si hay un error de red u otro inesperado
-        errors.general = m['contact.errorMessage']?.() ?? 'Algo salió mal. Intenta más tarde.';
-    } finally {
-        isSubmitting = false; // Desactiva el estado de envío
-    }
-}
+    // Función de limpieza: Se ejecuta cuando el componente se destruye para desconectar el observador.
+    return () => observer.disconnect();
+  });
 
+  // --- Estados Derivados ($derived) para Condiciones de Animación ---
+  // Estas variables reactivas simplifican las condiciones `{#if}` en el marcado,
+  // haciéndolas más legibles y declarativas.
+  const animateHeader = $derived(visibleElements.has('header'));
+  const animateContactInfo = $derived(mounted && visibleElements.has('contact-info'));
+  const animateAdditionalInfo = $derived(mounted && visibleElements.has('additional-info'));
+  const animateContactForm = $derived(mounted && visibleElements.has('contact-form'));
+
+  // --- Clases de Tailwind CSS Reutilizables ---
+  // infoCardClasses: Define los estilos comunes para las tarjetas principales de información.
+  const infoCardClasses =
+    'bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-300';
 </script>
 
 <svelte:head>
-	<title>{m['contact.title']()} - {personalInfo.name}</title>
-	    <meta name="description" content={m['contact.headerDescription']()} />
+  <title>{m['contact.title']()} - {personalInfo.name}</title>
+  <meta name="description" content={m['contact.headerDescription']()} />
 </svelte:head>
 
 <div class="max-w-6xl mx-auto px-4 py-12">
-	<div class="text-center mb-16" data-animate-id="header">
-		{#if visibleElements.has('header')}
-        <div transition:fade={{ duration: 800, delay: 100 }}>
-            <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                {m['contact.title']()}
-            </h1>
-            <p class="text-xl text-gray-600 dark:text-gray-400">
-                {m['contact.headerDescription']()}
-            </p>
-        </div>
+  <div class="text-center mb-16" data-animate-id="header">
+    {#if animateHeader}
+      <div transition:fade={{ duration: 800, delay: 100 }}>
+        <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          {m['contact.title']()}
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400">
+          {m['contact.headerDescription']()}
+        </p>
+      </div>
     {:else}
-        <div class="h-[150px] w-full"></div> {/if}
-	</div>
+      <div class="h-[150px] w-full"></div>
+    {/if}
+  </div>
 
-	<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-		<div class="space-y-8">
-			<div data-animate-id="contact-info">
-				{#if mounted && visibleElements.has('contact-info')}
-					<div transition:fly={{ y: 30, duration: 600, delay: 200, easing: quintOut }}>
-						<div
-							class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-300"
-						>
-							<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-								{m['contact.infoTitle']()}
-							</h2>
-							<div class="space-y-6">
-								<div
-									class="flex items-center space-x-4 hover:scale-105 transition-transform duration-200"
-									transition:fly={{ x: -20, duration: 400, delay: 100, easing: quintOut }}
-								>
-									<div class="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-										<Mail class="w-6 h-6 text-blue-600 dark:text-blue-400" />
-									</div>
-									<div>
-										<h3 class="font-semibold text-gray-900 dark:text-white">
-											{m['contact.email']()}
-										</h3>
-										<p class="text-gray-600 dark:text-gray-400">{personalInfo.email}</p>
-									</div>
-								</div>
-								<div
-									class="flex items-center space-x-4 hover:scale-105 transition-transform duration-200"
-									transition:fly={{ x: -20, duration: 400, delay: 200, easing: quintOut }}
-								>
-									<div class="p-3 bg-green-100 dark:bg-green-900 rounded-lg">
-										<MapPin class="w-6 h-6 text-green-600 dark:text-green-400" />
-									</div>
-									<div>
-										<h3 class="font-semibold text-gray-900 dark:text-white">
-											{m['contact.locationTitle']()}
-										</h3>
-										<p class="text-gray-600 dark:text-gray-400">{personalInfo.location}</p>
-									</div>
-								</div>
-								<!-- GitHub -->
-								<div
-									class="flex items-center space-x-4 hover:scale-105 transition-transform duration-200"
-									transition:fly={{ x: -20, duration: 400, delay: 300, easing: quintOut }}
-								>
-									<div class="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
-										<Github class="w-6 h-6 text-gray-600 dark:text-gray-400" />
-									</div>
-									<div>
-										<a
-											href="https://github.com/misterlink19"
-											target="_blank"
-											rel="noopener"
-											class="font-semibold text-gray-900 dark:text-white hover:underline"
-										>
-											GitHub
-										</a>
-									</div>
-								</div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div class="space-y-8">
+      <div data-animate-id="contact-info">
+        {#if animateContactInfo}
+          <div transition:fly={{ y: 30, duration: 600, delay: 200, easing: quintOut }}>
+            <div class="{infoCardClasses}">
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                {m['contact.infoTitle']()}
+              </h2>
+              <div class="space-y-6">
+                <ContactInfoItem
+                  icon={Mail}
+                  title={m['contact.email']()}
+                  value={personalInfo.email}
+                  delay={100}
+                  iconBgClass="bg-blue-100 dark:bg-blue-900"
+                  iconColorClass="text-blue-600 dark:text-blue-400"
+                />
+                <ContactInfoItem
+                  icon={MapPin}
+                  title={m['contact.locationTitle']()}
+                  value={personalInfo.location}
+                  delay={200}
+                  iconBgClass="bg-green-100 dark:bg-green-900"
+                  iconColorClass="text-green-600 dark:text-green-400"
+                />
+                <ContactInfoItem
+                  icon={Github}
+                  title="GitHub"
+                  value="misterlink19"
+                  href="https://github.com/misterlink19"
+                  delay={300}
+                  iconBgClass="bg-gray-100 dark:bg-gray-700"
+                  iconColorClass="text-gray-600 dark:text-gray-400"
+                />
+                <ContactInfoItem
+                  icon={Linkedin}
+                  title="LinkedIn"
+                  value="Amle Martinez Marte"
+                  href="https://www.linkedin.com/in/amle-martinez-marte-15a433208/"
+                  delay={400}
+                  iconBgClass="bg-blue-50 dark:bg-blue-900"
+                  iconColorClass="text-blue-600 dark:text-blue-400"
+                />
+              </div>
+            </div>
+          </div>
+        {/if}
+      </div>
 
-								<!-- LinkedIn -->
-								<div
-									class="flex items-center space-x-4 hover:scale-105 transition-transform duration-200"
-									transition:fly={{ x: -20, duration: 400, delay: 400, easing: quintOut }}
-								>
-									<div class="p-3 bg-blue-50 dark:bg-blue-900 rounded-lg">
-										<Linkedin class="w-6 h-6 text-blue-600 dark:text-blue-400" />
-									</div>
-									<div>
-										<a
-											href="https://www.linkedin.com/in/amle-martinez-marte-15a433208/"
-											target="_blank"
-											rel="noopener"
-											class="font-semibold text-gray-900 dark:text-white hover:underline"
-										>
-											LinkedIn
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				{/if}
-			</div>
+      <div data-animate-id="additional-info">
+        {#if animateAdditionalInfo}
+          <div transition:fly={{ y: 20, duration: 500, delay: 400, easing: quintOut }}>
+            <div
+              class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800 hover:shadow-lg transition-shadow duration-300"
+            >
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                {m['contact.whyWorkWithMe']()}
+              </h3>
+              <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                {#each [m['contact.benefit1'](), m['contact.benefit2'](), m['contact.benefit3'](), m['contact.benefit4']()] as benefit, index}
+                  <li
+                    class="flex items-start hover:translate-x-2 transition-transform duration-200"
+                    transition:fly={{ x: -10, duration: 300, delay: index * 100, easing: quintOut }}
+                  >
+                    <span class="text-blue-600 dark:text-blue-400 mr-2">✓</span>
+                    {benefit}
+                  </li>
+                {/each}
+              </ul>
+            </div>
+          </div>
+        {/if}
+      </div>
+    </div>
 
-			<div data-animate-id="additional-info">
-				{#if mounted && visibleElements.has('additional-info')}
-					<div transition:fly={{ y: 20, duration: 500, delay: 400, easing: quintOut }}>
-						<div
-							class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800 hover:shadow-lg transition-shadow duration-300"
-						>
-							<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
-								{m['contact.whyWorkWithMe']()}
-							</h3>
-							<ul class="space-y-3 text-gray-700 dark:text-gray-300">
-								{#each [m['contact.benefit1'](), m['contact.benefit2'](), m['contact.benefit3'](), m['contact.benefit4']()] as benefit, index}
-									<li
-										class="flex items-start hover:translate-x-2 transition-transform duration-200"
-										transition:fly={{ x: -10, duration: 300, delay: index * 100, easing: quintOut }}
-									>
-										<span class="text-blue-600 dark:text-blue-400 mr-2">✓</span>
-										{benefit}
-									</li>
-								{/each}
-							</ul>
-						</div>
-					</div>
-				{/if}
-			</div>
-		</div>
-
-		<div data-animate-id="contact-form">
-			{#if mounted && visibleElements.has('contact-form')}
-				<div transition:fly={{ y: 30, duration: 600, delay: 300, easing: quintOut }}>
-					<div
-						class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-gray-700"
-					>
-						{#if showSuccess}
-							<div
-								class="mb-6 p-4 bg-green-100 dark:bg-green-900 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-200"
-								transition:scale={{ duration: 400, easing: quintOut }}
-							>
-								<p class="font-medium">{m['contact.success']()}</p>
-							</div>
-						{/if}
-
-						<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-							{m['contact.title']()}
-						</h2>
-
-						<form onsubmit={handleSubmit} class="space-y-6">
-							<div>
-								<label
-									for="name"
-									class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-								>
-									{m['contact.name']()}
-								</label>
-								<input
-									type="text"
-									id="name"
-									name="name"
-									bind:value={formData.name}
-									class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
-									class:border-red-500={errors.name}
-								/>
-								{#if errors.name}
-									<p class="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
-								{/if}
-							</div>
-
-							<div>
-								<label
-									for="email"
-									class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-								>
-									{m['contact.email']()}
-								</label>
-								<input
-									type="email"
-									id="email"
-									name="email"
-									bind:value={formData.email}
-									class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
-									class:border-red-500={errors.email}
-								/>
-								{#if errors.email}
-									<p class="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
-								{/if}
-							</div>
-
-							<div>
-								<label
-									for="message"
-									class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-								>
-									{m['contact.message']()}
-								</label>
-								<textarea
-									id="message"
-									name="message"
-									rows="5"
-									bind:value={formData.message}
-									class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
-									class:border-red-500={errors.message}
-								></textarea>
-								{#if errors.message}
-									<p class="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>
-								{/if}
-							</div>
-
-							<button
-								type="submit"
-								class="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-								class:opacity-50={isSubmitting}
-								disabled={isSubmitting}
-							>
-								{#if isSubmitting}
-									<svg
-										class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 24 24"
-									>
-										<circle
-											class="opacity-25"
-											cx="12"
-											cy="12"
-											r="10"
-											stroke="currentColor"
-											stroke-width="4"
-										></circle>
-										<path
-											class="opacity-75"
-											fill="currentColor"
-											d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-										></path>
-									</svg>
-									{m['contact.sending']()}
-								{:else}
-									<Send class="w-5 h-5 mr-2" />
-									{m['contact.send']()}
-								{/if}
-							</button>
-							{#if errors.general}
-								<p class="mt-1 text-sm text-red-600 dark:text-red-400">{errors.general}</p>
-							{/if}
-						</form>
-					</div>
-				</div>
-			{/if}
-		</div>
-	</div>
+    <div data-animate-id="contact-form">
+      {#if animateContactForm}
+        <div transition:fly={{ y: 30, duration: 600, delay: 300, easing: quintOut }}>
+          <ContactForm />
+        </div>
+      {/if}
+    </div>
+  </div>
 </div>
