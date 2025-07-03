@@ -166,16 +166,17 @@ async function handleSubmit(event: Event) {
 
 <div class="max-w-6xl mx-auto px-4 py-12">
 	<div class="text-center mb-16" data-animate-id="header">
-		{#if mounted && visibleElements.has('header')}
-			<div transition:fade={{ duration: 800, delay: 100 }}>
-				<h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-					{m['contact.title']()}
-				</h1>
-				<p class="text-xl text-gray-600 dark:text-gray-400">
-					{m['contact.headerDescription']()}
-				</p>
-			</div>
-		{/if}
+		{#if visibleElements.has('header')}
+        <div transition:fade={{ duration: 800, delay: 100 }}>
+            <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                {m['contact.title']()}
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400">
+                {m['contact.headerDescription']()}
+            </p>
+        </div>
+    {:else}
+        <div class="h-[150px] w-full"></div> {/if}
 	</div>
 
 	<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
