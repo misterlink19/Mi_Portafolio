@@ -9,27 +9,22 @@
   // Icono de envío para el botón del formulario.
   import { Send } from '@lucide/svelte';
 
-  // --- Integración con SvelteKit Forms ---
-  // `enhance`: Función para interceptar el envío del formulario y manejarlo con JavaScript (SPA-like).
-  import { enhance } from '$app/forms';
-  // `page` store: Acceso a los datos de la página y del formulario (errores, éxito) desde el servidor.
-  import { page } from '$app/stores';
-
   // --- Variables de Estado Reactivas ($state) ---
   // `formData`: Contiene los valores actuales de los campos del formulario.
-  // Se inicializa con datos del servidor (`$page.form?.formData`) para persistir entradas en caso de error.
   let formData = $state({
-    name: $page.form?.formData?.name || '',
-    email: $page.form?.formData?.email || '',
-    message: $page.form?.formData?.message || ''
+    name: '',
+    email: '',
+    message: ''
   });
 
-  // `errors`: Objeto reactivo que contiene los mensajes de error de validación devueltos por el servidor.
-  let errors = $derived($page.form?.errors || {});
+  // `errors`: Objeto reactivo para almacenar mensajes de error de validación por campo.
+  let errors: Record<string, string> = $state({});
   // `isSubmitting`: Bandera que indica si el formulario está en proceso de envío.
   let isSubmitting = $state(false);
   // `showSuccess`: Bandera que controla la visibilidad del mensaje de éxito.
-  let showSuccess = $state($page.form?.success === true);
+  let showSuccess = $state(false);
+  // `generalError`: Almacena un mensaje de error general del envío (ej. error de red).
+  let generalError = $state('');
 
   // --- Clases de Tailwind Reutilizables ---
   // Optimizan la consistencia visual y reducen la repetición en el marcado.
@@ -39,9 +34,8 @@
   const errorTextClasses = 'mt-1 text-sm text-red-600 dark:text-red-400';
 
   // --- Lógica de Validación del Formulario (Cliente) ---
-  // Proporciona feedback instantáneo al usuario antes de enviar al servidor.
-  // La validación en el servidor es la capa de seguridad principal.
-  function validateClientForm(): boolean {
+  // Valida los campos del formulario y actualiza el objeto `errors` localmente.
+  function validateForm(): boolean {
     const newErrors: Record<string, string> = {};
 
     if (!formData.name.trim()) newErrors.name = m['contact.nameRequired']();
@@ -52,20 +46,64 @@
     }
     if (!formData.message.trim()) newErrors.message = m['contact.messageRequired']();
 
-    // Retorna `true` si todos los campos son válidos en el cliente.
-    return Object.keys(newErrors).length === 0;
+    errors = newErrors; // Asigna los errores validados al estado reactivo.
+    return Object.keys(newErrors).length === 0; // Retorna `true` si no hay errores.
   }
 
-  // --- Efecto Reactivo ($effect) ---
-  // Observa si el formulario se envió con éxito y limpia los campos,
-  // luego oculta el mensaje de éxito después de un tiempo.
-  $effect(() => {
-    if ($page.form?.success) {
-      formData = { name: '', email: '', message: '' }; // Limpia los campos del formulario.
-      showSuccess = true; // Muestra el mensaje de éxito.
-      setTimeout(() => showSuccess = false, 5000); // Oculta el mensaje después de 5 segundos.
+  // --- Manejador de Envío del Formulario (Cliente-Side) ---
+  // Procesa el envío del formulario, realiza la validación y la llamada a la API externa.
+  async function handleSubmit(event: Event) { // Añadir 'event: Event' como parámetro
+    event.preventDefault(); // Previene el comportamiento predeterminado del formulario.
+
+    // Limpia los estados de mensajes previos antes de un nuevo intento.
+    showSuccess = false;
+    errors = {};
+    generalError = '';
+
+    // Valida el formulario en el cliente; detiene el envío si la validación falla.
+    if (!validateForm()) {
+      return;
     }
-  });
+
+    isSubmitting = true; // Activa el indicador de envío.
+
+    try {
+      // Envía los datos del formulario a Web3Forms directamente desde el navegador.
+      const web3formsResponse = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          // ADVERTENCIA: La access_key estará visible en el código fuente del cliente.
+          // Web3Forms está diseñado para manejar esto, pero es una consideración de seguridad.
+          access_key: 'a13184c3-850f-48aa-911e-2890e181b423', // TU CLAVE REAL AQUÍ
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        })
+      });
+
+      // Procesa la respuesta de la API de Web3Forms.
+      if (web3formsResponse.ok) {
+        showSuccess = true; // Muestra el mensaje de éxito.
+        formData = { name: '', email: '', message: '' }; // Limpia los campos del formulario.
+        // Oculta el mensaje de éxito automáticamente después de 5 segundos.
+        setTimeout(() => showSuccess = false, 5000);
+      } else {
+        // En caso de error de la API, intenta obtener un mensaje específico.
+        const errorData = await web3formsResponse.json();
+        console.error('Web3Forms API error:', errorData);
+        generalError = errorData.message || (m['contact.errorMessage']?.() ?? 'Error al enviar el mensaje.');
+      }
+    } catch (error) {
+      // Maneja errores de red o excepciones inesperadas durante el envío.
+      console.error('Error en el envío del formulario cliente-side:', error);
+      generalError = m['contact.errorMessage']?.() ?? 'Algo salió mal. Por favor, intenta de nuevo más tarde.';
+    } finally {
+      isSubmitting = false; // Siempre desactiva el indicador de envío.
+    }
+  }
 </script>
 
 <div
@@ -85,33 +123,12 @@
     {m['contact.title']()}
   </h2>
 
-  <!-- Formulario de contacto.
-       `method="POST"`: Envía los datos al servidor.
-       `use:enhance`: Permite un envío sin recarga de página y control de estados.
-       No se usa `action` ni `formaction` para la acción `default` de SvelteKit.
+  <!-- Formulario de contacto: Envío completamente manejado en el cliente.
+       `onsubmit`: Atributo de evento nativo para manejar el envío del formulario.
+       `event.preventDefault()` se llama dentro de `handleSubmit` para evitar la recarga de la página.
   -->
-  <form
-    method="POST"
-    use:enhance={() => {
-      // Se ejecuta ANTES de enviar el formulario.
-      if (!validateClientForm()) {
-        // Si la validación del cliente falla, interrumpe el envío.
-        // Aquí se podría añadir lógica para resaltar campos o mostrar alertas.
-        return async ({ update }) => { /* No-op para prevenir el envío. */ };
-      }
-
-      isSubmitting = true; // Activa el indicador de envío.
-      showSuccess = false; // Oculta cualquier mensaje de éxito anterior.
-
-      return async ({ update }) => {
-        // Se ejecuta DESPUÉS de que la acción del servidor responde.
-        isSubmitting = false; // Desactiva el indicador de envío.
-        await update(); // Refresca los datos de la página y del formulario (`$page.form`).
-      };
-    }}
-    class="space-y-6"
-  >
-    <!-- Campo Nombre -->
+  <form onsubmit={handleSubmit} class="space-y-6">
+    <!-- Campo Nombre: Input para el nombre del remitente. -->
     <div>
       <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
         {m['contact.name']()}
@@ -129,7 +146,7 @@
       {/if}
     </div>
 
-    <!-- Campo Email -->
+    <!-- Campo Email: Input para la dirección de correo electrónico del remitente. -->
     <div>
       <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
         {m['contact.email']()}
@@ -147,7 +164,7 @@
       {/if}
     </div>
 
-    <!-- Campo Mensaje -->
+    <!-- Campo Mensaje: Área de texto para el mensaje del remitente. -->
     <div>
       <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
         {m['contact.message']()}
@@ -165,7 +182,7 @@
       {/if}
     </div>
 
-    <!-- Botón de Envío -->
+    <!-- Botón de Envío: Activa el proceso de envío del formulario. -->
     <button
       type="submit"
       class="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
@@ -201,9 +218,9 @@
         {m['contact.send']()}
       {/if}
     </button>
-    {#if errors.general}
-      <!-- Muestra un mensaje de error general si el envío falla en el servidor. -->
-      <p class="{errorTextClasses}">{errors.general}</p>
+    {#if generalError}
+      <!-- Muestra un mensaje de error general si el envío falla (ej. problemas de red). -->
+      <p class="{errorTextClasses}">{generalError}</p>
     {/if}
   </form>
 </div>

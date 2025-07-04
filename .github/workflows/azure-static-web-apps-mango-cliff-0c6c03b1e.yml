@@ -71,7 +71,7 @@ jobs:
           # Ruta de la aplicación compilada, lista para servir.
           app_location: "build" 
           # Ruta del código de la API (Azure Functions). Vacío si no hay API.
-          api_location: "build/server" 
+          api_location: "" 
           # Directorio de salida del build (menos relevante con skip_app_build: true).
           output_location: "build"
           # Omite el proceso de build de Oryx, ya que la aplicación se construye en un paso anterior.
