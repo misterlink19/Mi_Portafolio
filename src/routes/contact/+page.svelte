@@ -102,7 +102,7 @@
     <div class="space-y-8">
       <div data-animate-id="contact-info">
         {#if animateContactInfo}
-          <div transition:fly={{ y: 30, duration: 600, delay: 200, easing: quintOut }}>
+          <div transition:fade={{ duration: 600, delay: 200, easing: quintOut }}>
             <div class="{infoCardClasses}">
               <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 {m['contact.infoTitle']()}
@@ -150,7 +150,7 @@
 
       <div data-animate-id="additional-info">
         {#if animateAdditionalInfo}
-          <div transition:fly={{ y: 20, duration: 500, delay: 400, easing: quintOut }}>
+          <div transition:fade={{ duration: 500, delay: 400, easing: quintOut }}>
             <div
               class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800 hover:shadow-lg transition-shadow duration-300"
             >
@@ -161,7 +161,7 @@
                 {#each [m['contact.benefit1'](), m['contact.benefit2'](), m['contact.benefit3'](), m['contact.benefit4']()] as benefit, index}
                   <li
                     class="flex items-start hover:translate-x-2 transition-transform duration-200"
-                    transition:fly={{ x: -10, duration: 300, delay: index * 100, easing: quintOut }}
+                    transition:fade={{ duration: 300, delay: index * 100, easing: quintOut }}
                   >
                     <span class="text-blue-600 dark:text-blue-400 mr-2">✓</span>
                     {benefit}
@@ -176,7 +176,7 @@
 
     <div data-animate-id="contact-form">
       {#if animateContactForm}
-        <div transition:fly={{ y: 30, duration: 600, delay: 300, easing: quintOut }}>
+        <div transition:fade={{ duration: 600, delay: 300, easing: quintOut }}>
           <ContactForm />
         </div>
       {/if}
