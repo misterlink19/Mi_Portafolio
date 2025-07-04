@@ -1,78 +1,81 @@
 <script lang="ts">
-  // --- Core Svelte ---
-  // onMount: Para ejecutar código una vez que el componente se ha renderizado en el DOM.
+  // Importaciones de Svelte para el ciclo de vida del componente y transiciones.
   import { onMount } from 'svelte';
-  // fly, fade: Transiciones para animar elementos al aparecer o desaparecer.
   import { fly, fade } from 'svelte/transition';
-  // quintOut: Una función de easing para transiciones con un efecto de desaceleración.
   import { quintOut } from 'svelte/easing';
 
-  // --- Datos Locales ---
-  // personalInfo: Contiene datos como el nombre y la ubicación del portfolio.
+  // Importación de datos personales (email, ubicación) y mensajes para internacionalización.
   import { personalInfo } from '$lib/data/portfolio.js';
-
-  // --- Internacionalización ---
-  // m: Objeto que contiene todos los mensajes traducidos de la aplicación (ej. títulos, descripciones).
   import * as m from '$lib/paraglide/messages';
 
-  // --- Iconos ---
-  // Iconos de Lucide Svelte, utilizados por el componente ContactInfoItem.
+  // Importación de iconos desde Lucide Svelte.
   import { Mail, MapPin, Linkedin, Github } from '@lucide/svelte';
 
-  // --- Componentes Reutilizables ---
-  // ContactInfoItem: Muestra un único punto de contacto (email, ubicación, etc.).
+  // Importación de componentes reutilizables.
   import ContactInfoItem from '$lib/components/ContactInfoItem.svelte';
-  // ContactForm: Encapsula toda la lógica y UI del formulario de contacto.
   import ContactForm from '$lib/components/ContactForm.svelte';
 
-  // --- Variables de Estado Reactivas ($state) ---
-  // visibleElements: Un Set que guarda los `data-animate-id` de los elementos que están en el viewport.
-  // Permite activar animaciones solo cuando el usuario los ve.
+  // --- Variables de Estado Reactivas ---
+
+  /**
+   * @type {Set<string>} visibleElements - Un conjunto que almacena los IDs de los elementos
+   * que actualmente son visibles en el viewport. Utilizado para controlar cuándo activar
+   * las animaciones de entrada basadas en la visibilidad.
+   */
   let visibleElements = $state(new Set<string>());
-  // mounted: Un booleano que indica si el componente principal ya se ha montado en el DOM.
-  // Es útil para coordinar animaciones iniciales y evitar efectos visuales no deseados.
+
+  /**
+   * @type {boolean} mounted - Indica si el componente ha sido montado en el DOM.
+   * Se usa para asegurar que las animaciones solo se activen después de que el DOM esté listo,
+   * evitando animaciones en la carga inicial que puedan causar problemas visuales o de rendimiento.
+   */
   let mounted = $state(false);
 
-  // --- Hook `onMount` ---
-  // Configura un IntersectionObserver para detectar cuándo los elementos con `data-animate-id`
-  // entran en el viewport, y así activar sus animaciones.
+  /**
+   * Hook `onMount`: Se ejecuta una vez que el componente ha sido montado en el DOM.
+   * Aquí se inicializa un IntersectionObserver para detectar cuando los elementos con
+   * el atributo `data-animate-id` entran en el viewport, activando sus animaciones.
+   */
   onMount(() => {
-    mounted = true; // El componente ya está listo, las animaciones iniciales pueden activarse.
+    // Establece `mounted` a `true` una vez que el componente está en el DOM.
+    mounted = true;
 
+    // Crea un IntersectionObserver.
+    // Este observador monitorea la visibilidad de los elementos en el viewport.
     const observer = new IntersectionObserver(
       (entries) => {
+        // Itera sobre cada entrada (elemento observado).
         entries.forEach((entry) => {
+          // Si el elemento está intersectando (visible) el viewport.
           if (entry.isIntersecting) {
+            // Obtiene el ID de animación del atributo `data-animate-id`.
             const id = (entry.target as HTMLElement).dataset.animateId;
             if (id) {
-              // Añade el ID del elemento visible al Set reactivo.
+              // Añade el ID del elemento al conjunto `visibleElements`,
+              // lo que desencadena la visualización y animación del elemento.
               visibleElements = new Set([...visibleElements, id]);
             }
           }
         });
       },
-      // Opciones del observador: El 10% del elemento debe estar visible para considerarse "intersecting".
-      // rootMargin añade un margen de 50px alrededor del viewport para una detección anticipada.
+      // Opciones del IntersectionObserver:
+      // - `threshold: 0.1`: El callback se ejecuta cuando el 10% del elemento es visible.
+      // - `rootMargin: '50px'`: Expande el área de intersección en 50px alrededor del viewport.
       { threshold: 0.1, rootMargin: '50px' }
     );
 
-    // Observa todos los elementos en el DOM que tienen el atributo `data-animate-id`.
+    // Observa todos los elementos en el documento que tienen el atributo `data-animate-id`.
     document.querySelectorAll('[data-animate-id]').forEach((el) => observer.observe(el));
 
-    // Función de limpieza: Se ejecuta cuando el componente se destruye para desconectar el observador.
+    // Función de limpieza: Desconecta el observador cuando el componente se destruye
+    // para evitar pérdidas de memoria.
     return () => observer.disconnect();
   });
 
-  // --- Estados Derivados ($derived) para Condiciones de Animación ---
-  // Estas variables reactivas simplifican las condiciones `{#if}` en el marcado,
-  // haciéndolas más legibles y declarativas.
-  const animateHeader = $derived(visibleElements.has('header'));
-  const animateContactInfo = $derived(mounted && visibleElements.has('contact-info'));
-  const animateAdditionalInfo = $derived(mounted && visibleElements.has('additional-info'));
-  const animateContactForm = $derived(mounted && visibleElements.has('contact-form'));
-
-  // --- Clases de Tailwind CSS Reutilizables ---
-  // infoCardClasses: Define los estilos comunes para las tarjetas principales de información.
+  /**
+   * Clases CSS comunes para las tarjetas de información de contacto.
+   * Se definen una vez para reutilización y consistencia.
+   */
   const infoCardClasses =
     'bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-300';
 </script>
@@ -84,7 +87,7 @@
 
 <div class="max-w-6xl mx-auto px-4 py-12">
   <div class="text-center mb-16" data-animate-id="header">
-    {#if animateHeader}
+    {#if visibleElements.has('header')}
       <div transition:fade={{ duration: 800, delay: 100 }}>
         <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
           {m['contact.title']()}
@@ -101,8 +104,8 @@
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
     <div class="space-y-8">
       <div data-animate-id="contact-info">
-        {#if animateContactInfo}
-          <div transition:fade={{ duration: 600, delay: 200, easing: quintOut }}>
+        {#if mounted && visibleElements.has('contact-info')}
+          <div transition:fly={{ y: 30, duration: 600, delay: 200, easing: quintOut }}>
             <div class="{infoCardClasses}">
               <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 {m['contact.infoTitle']()}
@@ -145,12 +148,14 @@
               </div>
             </div>
           </div>
+        {:else}
+          <div class="min-h-[450px] w-full lg:min-h-[400px]"></div>
         {/if}
       </div>
 
       <div data-animate-id="additional-info">
-        {#if animateAdditionalInfo}
-          <div transition:fade={{ duration: 500, delay: 400, easing: quintOut }}>
+        {#if mounted && visibleElements.has('additional-info')}
+          <div transition:fly={{ y: 20, duration: 500, delay: 400, easing: quintOut }}>
             <div
               class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800 hover:shadow-lg transition-shadow duration-300"
             >
@@ -170,15 +175,19 @@
               </ul>
             </div>
           </div>
+        {:else}
+          <div class="min-h-[250px] w-full lg:min-h-[200px]"></div>
         {/if}
       </div>
     </div>
 
     <div data-animate-id="contact-form">
-      {#if animateContactForm}
-        <div transition:fade={{ duration: 600, delay: 300, easing: quintOut }}>
+      {#if mounted && visibleElements.has('contact-form')}
+        <div transition:fly={{ y: 30, duration: 600, delay: 300, easing: quintOut }}>
           <ContactForm />
         </div>
+      {:else}
+        <div class="min-h-[550px] w-full lg:min-h-[500px]"></div>
       {/if}
     </div>
   </div>
