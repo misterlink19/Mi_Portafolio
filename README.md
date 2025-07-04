@@ -127,11 +127,11 @@ body: JSON.stringify({
 
 ## 🚀 Despliegue en Azure Static Web Apps
 
-- Usa `@sveltejs/adapter-static` en `svelte.config.js`.
-- Asegúrate de tener `export const prerender = true` en tus rutas.
-- Configura tu workflow CI/CD en `.github/workflows/azure-static-web-apps.yml`.
-- Agrega el secreto `AZURE_STATIC_WEB_APPS_API_TOKEN...` en GitHub.
-- Cada push a `master` despliega automáticamente la app.
+
+- Cree un recurso estastico de Web en Azure 
+- Modifique el workflow CI/CD que le creo Azure en que  `.github/workflows/`
+- Copie la configuracion del workflow CI/CD en `.github/workflows/azure-static-web-apps.yml` menos el trabajo de deploy.
+-  Y listo con cada push a `master` despliega automáticamente la app.
 
 ## 🌍 Internacionalización (i18n)
 
