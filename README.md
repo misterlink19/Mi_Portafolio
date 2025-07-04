@@ -31,20 +31,65 @@ Explora el portafolio desplegado:
 
 ```plaintext
 Mi_Portafolio/
-├── .github/            # Workflows CI/CD
-├── .vscode/            # Configuración VS Code
-├── src/                # Código fuente
+├── .github/
+│   └── workflows/
+│       └── azure-static-web-apps.yml             # Despliegue automático en Azure
+├── .vscode/
+│   └── settings.json                             # Configuración personalizada para VS Code
+├── messages/                                     # Traducciones JSON para el formulario de contacto
+│   ├── en.json
+│   └── es.json
+├── project.inlang/                               # Configuración para internacionalización con Paraglide
+│   ├── .gitignore
+│   ├── project_id
+│   └── settings.json
+├── src/
+│   ├── app.css                                    # Estilos globales
+│   ├── app.d.ts                                   # Tipado global para TypeScript
+│   ├── app.html                                   # HTML base usado por SvelteKit
+│   ├── hooks.ts                                   # Hooks cliente
+│   ├── hooks.server.ts                            # Hooks del lado servidor
 │   ├── lib/
-│   │   ├── data/       # Datos estáticos
-│   │   └── paraglide/  # Archivos i18n
-│   ├── routes/         # Rutas y páginas
-│   └── app.html        # HTML principal
-├── static/             # Archivos públicos
-├── project.inlang      # Config i18n (Inlang)
-├── svelte.config.js    # Config SvelteKit
-├── tailwind.config.cjs # Config Tailwind CSS
-├── package.json        # Scripts y metadatos
-└── README.md           # Este archivo
+│   │   ├── components/                            # Componentes UI reutilizables
+│   │   │   ├── Footer.svelte
+│   │   │   ├── Header.svelte
+│   │   │   ├── ImageCarousel.svelte
+│   │   │   ├── ScrollToTop.svelte
+│   │   │   ├── SkillItem.svelte
+│   │   │   └── Timeline.svelte
+│   │   ├── data/
+│   │   │   └── portfolio.js                       # Datos estructurados del portafolio
+│   │   ├── paraglide/
+│   │   │   └── messages.js                        # Traducciones dinámicas (i18n)
+│   │   └── stores/
+│   │       ├── animations.js                      # Control de animaciones/transiciones
+│   │       └── theme.js                           # Estado para modo claro/oscuro
+│   ├── routes/
+│   │   ├── +layout.svelte                         # Layout global del sitio
+│   │   ├── +layout.ts                             # Script asociado al layout
+│   │   ├── +page.svelte                           # Página principal (home)
+│   │   ├── about/
+│   │   │   └── +page.svelte                       # Página "Sobre mí"
+│   │   ├── contact/
+│   │   │   └── +page.svelte                       # Página de contacto
+│   │   ├── projects/
+│   │   │   └── +page.svelte                       # Página con proyectos realizados
+├── static/
+│   ├── favicon.png                                # Ícono del sitio
+│   ├── icons/                                     # Íconos SVG personalizados
+│   ├── images/                                    # Imágenes generales del sitio
+│   └── projects/                                  # Imágenes asociadas a cada proyecto
+├── .gitignore                                     # Exclusión de archivos para Git
+├── .npmrc                                         # Configuración de npm local
+├── .prettierrc                                    # Reglas de formato de Prettier
+├── .prettierignore                                # Archivos ignorados por Prettier
+├── eslint.config.js                               # Reglas de linting
+├── jsconfig.json                                  # Configuración JS/TS para VSCode
+├── package-lock.json                              # Mapa de dependencias (npm)
+├── package.json                                   # Scripts y dependencias del proyecto
+├── README.md                                      # Documentación principal
+├── svelte.config.js                               # Adaptador y configuración de SvelteKit
+└── vite.config.js                                 # Configuración de bundling con Vite
 ```
 
 ## ⚙️ Instalación y Desarrollo Local
