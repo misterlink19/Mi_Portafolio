@@ -5,7 +5,7 @@ Un portafolio personal estático moderno, construido con **SvelteKit** y despleg
 ## 🚀 Live Demo
 
 Explora el portafolio desplegado:  
-👉 [Visita el Live Demo aquí](https://github.com/misterlink19/Mi_Portafolio)
+👉 [Visita el la aplicacion desplegada aquí]([https://github.com/misterlink19/Mi_Portafolio](https://mango-cliff-0c6c03b1e.2.azurestaticapps.net/))
 
 ## ✨ Características Destacadas
 
