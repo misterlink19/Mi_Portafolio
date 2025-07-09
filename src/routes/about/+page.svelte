@@ -319,8 +319,6 @@
 				{/if}
 			</div>
 
-		
-
 			<!-- Tarjeta de Certificaciones (ocupa 2 columnas en md y lg) -->
 			<div class="md:col-span-2" data-animate-id="certificates-card">
 				{#if mounted && visibleElements.has('certificates-card')}
@@ -356,7 +354,7 @@
 					<div class="bg-gray-100 dark:bg-gray-700 rounded-2xl p-8 h-[250px] animate-pulse"></div>
 				{/if}
 			</div>
-				<!-- Tarjeta de Idiomas -->
+			<!-- Tarjeta de Idiomas -->
 			<div data-animate-id="languages-card">
 				{#if mounted && visibleElements.has('languages-card')}
 					<div transition:fly={{ y: 30, duration: 600, delay: 200, easing: quintOut }}>

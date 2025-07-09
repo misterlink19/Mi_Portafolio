@@ -1,6 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
 
-
 export default {
 	kit: {
 		adapter: adapter({
@@ -13,7 +12,7 @@ export default {
 			strict: true
 		}),
 		paths: {
-      relative: false
-    }
+			relative: false
+		}
 	}
 };

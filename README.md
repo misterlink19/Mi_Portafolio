@@ -5,7 +5,7 @@ Un portafolio personal estático moderno, construido con **SvelteKit** y despleg
 ## 🚀 Live Demo
 
 Explora el portafolio desplegado:  
-👉 [Visita  la aplicacion desplegada aquí](https://mango-cliff-0c6c03b1e.2.azurestaticapps.net/)
+👉 [Visita la aplicacion desplegada aquí](https://mango-cliff-0c6c03b1e.2.azurestaticapps.net/)
 
 ## ✨ Características Destacadas
 
@@ -19,12 +19,12 @@ Explora el portafolio desplegado:
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Framework:** SvelteKit  
-- **Estilos:** Tailwind CSS  
-- **Iconografía:** Lucide Svelte  
-- **Formularios:** Web3Forms  
-- **Internacionalización:** Paraglide.js + Inlang  
-- **CI/CD & Hosting:** GitHub Actions + Azure Static Web Apps  
+- **Framework:** SvelteKit
+- **Estilos:** Tailwind CSS
+- **Iconografía:** Lucide Svelte
+- **Formularios:** Web3Forms
+- **Internacionalización:** Paraglide.js + Inlang
+- **CI/CD & Hosting:** GitHub Actions + Azure Static Web Apps
 - **Linting & Formato:** ESLint, Prettier
 
 ## 📂 Estructura del Proyecto
@@ -101,7 +101,7 @@ npm install
 npm run dev -- --open
 ```
 
-- Dev server en: `http://localhost:5173`  
+- Dev server en: `http://localhost:5173`
 - Para producción:
 
 ```bash
@@ -116,26 +116,24 @@ npm run preview
 
 ```javascript
 body: JSON.stringify({
-  access_key: 'TU_ACCESS_KEY', // <-- ¡Reemplaza esto!
-  name: formData.name,
-  email: formData.email,
-  message: formData.message
-})
+	access_key: 'TU_ACCESS_KEY', // <-- ¡Reemplaza esto!
+	name: formData.name,
+	email: formData.email,
+	message: formData.message
+});
 ```
 
 3. Guarda y prueba el formulario.
 
 ## 🚀 Despliegue en Azure Static Web Apps
 
-
-- Cree un recurso estastico de Web en Azure 
-- Modifique el workflow CI/CD que le creo Azure en que  `.github/workflows/`
+- Cree un recurso estastico de Web en Azure
+- Modifique el workflow CI/CD que le creo Azure en que `.github/workflows/`
 - Copie la configuracion del workflow CI/CD en `.github/workflows/azure-static-web-apps.yml` menos el trabajo de deploy.
--  Y listo con cada push a `master` despliega automáticamente la app.
+- Y listo con cada push a `master` despliega automáticamente la app.
 
 ## 🌍 Internacionalización (i18n)
 
 - Todas las cadenas en `src/lib/paraglide/messages.js`.
 - Inlang gestiona las traducciones y runtime.
 - El selector de idioma está en `src/routes/+layout.svelte`.
-

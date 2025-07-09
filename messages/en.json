@@ -1,121 +1,122 @@
 {
-    "$schema": "https://inlang.com/schema/inlang-message-format",
-    "about": "This is the /other page that only exists to illustrate routing with `localizeHref()`.",
-    "nav": {
-        "home": "Home",
-        "about": "About me",
-        "projects": "Projects",
-        "contact": "Contact"
-    },
-    "hello_world": "Greetings {username}",
-    "home": {
-        "welcome": "Welcome!",
-        "title": "Full Stack Developer",
-        "summary": "Junior Full Stack Developer with a solid foundation in Java and Python. Currently pursuing a Master’s in Agile Software Development at the University of Alcalá, where I work on projects using Spring Boot, microservices, and CI/CD. Committed to continuous learning and collaborative teamwork.",
-        "greeting": "Hello! I’m Amle Martinez Marte.",
-        "learnMore": "Learn more about me",
-        "CV": "Graduated Magna Cum Laude in Computer Science and currently pursuing a Master’s in Agile Software Development at the University of Alcalá. Proficient in Java, Python, and Spring Boot, with experience in scalable microservices and CI/CD pipelines for reliable deployments. In technical support, I automated processes with Python, reducing errors by 40% and optimizing fleet logistics. I excel in collaborating with multidisciplinary teams, ensuring code quality through testing and applying cybersecurity principles. Adaptable and proactive, I share knowledge and explore trends in music, comics, and new technologies."
-    },
-    "projects": {
-        "title": "My Projects",
-        "liveDemo": "Live Demo",
-        "viewCode": "View Code",
-        "technologiesUsed": "Technologies used",
-        "p1": {
-            "name": "Travel Comfort Project",
-            "description": "Travel Comfort Project is an online store specializing in suitcases and luggage. The application allows users to browse products, manage a shopping cart, and optionally access an administrative panel for inventory maintenance."
-        },
-        "p2": {
-            "name": "Formula 1 Portal",
-            "description": "Web application for managing a Formula 1 portal, allowing fans to access news and polls, teams to perform performance calculations, and administrators to manage site content and users."
-        },
-        "p3": {
-            "name": "Movie Management with Microservices",
-            "description": "This project is the evolution of a web application for movie management, initially developed during a Frameworks and Backend course. It has been expanded and improved with new functionalities and microservices integration, reinforcing learning about distributed architectures and service communication, similar to Filmaffinity."
-        },
-        "p4": {
-            "name": "MovieCards Project: Service Decoupling and Quality Improvement",
-            "description": "This project focuses on refactoring and modernizing an existing application, MovieCards, by transforming a previously integrated service into an independent, cloud-deployable solution. The main objective is to establish a more flexible and scalable microservices-based architecture, allowing core functionality to be consumed by various platforms (web, mobile, desktop) in a decoupled manner."
-        },
-        "subtitle": "Projects ordered chronologically, from newest to oldest",
-        "noImage": "No image available"
-    },
-    "contact": {
-        "title": "Contact",
-        "headerDescription": "Got a project in mind? Let’s talk!",
-        "infoTitle": "Contact Information",
-        "locationTitle": "Location",
-        "whyWorkWithMe": "Why work with me?",
-        "benefit1": "Quick response within 24 hours",
-        "benefit2": "Development with the latest technologies",
-        "benefit3": "Clean, well-documented code",
-        "benefit4": "Post-development support",
-        "name": "Name",
-        "email": "Email",
-        "message": "Message",
-        "send": "Send",
-        "sending": "Sending…",
-        "success": "Message sent successfully. Thank you!",
-        "nameRequired": "Name is required.",
-        "emailRequired": "Email is required.",
-        "emailInvalid": "Email is not valid.",
-        "messageRequired": "Message is required.",
-        "errorMessage": "There was an error sending your message. Please try again."
-    },
-    "footer": {
-        "copyright": "© 2025 Amle Martinez Marte. All rights reserved.",
-        "builtWith": "Built with SvelteKit, Tailwind CSS, and Paraglide.js"
-    },
-    "skills": {
-        "basic": "Basic",
-        "intermediate": "Intermediate",
-        "advanced": "Advanced",
-        "expert": "Expert",
-        "native": "Native",
-        "technical": {
-            "frontend": "Frontend Development",
-            "backend": "Backend Development",
-            "database": "Databases",
-            "devops": "DevOps",
-            "mobile": "Mobile Development",
-            "uiux": "UI/UX Design",
-            "web": "Web Development",
-            "security": "Cybersecurity",
-            "scrum": "Agile Methodologies (Scrum)",
-            "container": "Containers (Docker, Kubernetes)",
-            "network": "Networks and Systems"
-        },
-        "languages": {
-            "spanish": "Spanish",
-            "english": "English",
-            "french": "French"
-        },
-        "soft": {
-            "teamwork": "Teamwork",
-            "problemSolving": "Problem Solving",
-            "adaptability": "Adaptability",
-            "proactivity": "Proactivity & Initiative",
-            "organization": "Organization & Planning",
-            "continuousLearning": "Continuous Learning",
-            "communication": "Effective Communication",
-            "resilience": "Resilience",
-            "selfAwareness": "Self-awareness"
-        },
-        "hobbies": {
-            "readingBooks": "Book Reading",
-            "readingComicsManga": "Comics & Manga Reading",
-            "playingPiano": "Playing Piano",
-            "listeningMedia": "Podcasts & Audiobooks",
-            "watchingMedia": "Movies & TV Series",
-            "gaming": "Gaming"
-        }
-    },
-    "timeline": {
-        "gap": "Gap of {n} year{s}",
-        "present": "Present",
-        "duration": "{n} year{s}"
-    },
-    "work": {
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"about": "This is the /other page that only exists to illustrate routing with `localizeHref()`.",
+	"nav": {
+		"home": "Home",
+		"about": "About me",
+		"projects": "Projects",
+		"contact": "Contact"
+	},
+	"hello_world": "Greetings {username}",
+	"home": {
+		"welcome": "Welcome!",
+		"title": "Full Stack Developer",
+		"summary": "Junior Full Stack Developer with a solid foundation in Java and Python. Currently pursuing a Master’s in Agile Software Development at the University of Alcalá, where I work on projects using Spring Boot, microservices, and CI/CD. Committed to continuous learning and collaborative teamwork.",
+		"greeting": "Hello! I’m Amle Martinez Marte.",
+		"learnMore": "Learn more about me",
+		"CV": "Graduated Magna Cum Laude in Computer Science and currently pursuing a Master’s in Agile Software Development at the University of Alcalá. Proficient in Java, Python, and Spring Boot, with experience in scalable microservices and CI/CD pipelines for reliable deployments. In technical support, I automated processes with Python, reducing errors by 40% and optimizing fleet logistics. I excel in collaborating with multidisciplinary teams, ensuring code quality through testing and applying cybersecurity principles. Adaptable and proactive, I share knowledge and explore trends in music, comics, and new technologies."
+	},
+	"projects": {
+		"title": "My Projects",
+		"liveDemo": "Live Demo",
+		"viewCode": "View Code",
+		"technologiesUsed": "Technologies used",
+		"p1": {
+			"name": "Travel Comfort Project",
+			"description": "Travel Comfort Project is an online store specializing in suitcases and luggage. The application allows users to browse products, manage a shopping cart, and optionally access an administrative panel for inventory maintenance."
+		},
+		"p2": {
+			"name": "Formula 1 Portal",
+			"description": "Web application for managing a Formula 1 portal, allowing fans to access news and polls, teams to perform performance calculations, and administrators to manage site content and users."
+		},
+		"p3": {
+			"name": "Movie Management with Microservices",
+			"description": "This project is the evolution of a web application for movie management, initially developed during a Frameworks and Backend course. It has been expanded and improved with new functionalities and microservices integration, reinforcing learning about distributed architectures and service communication, similar to Filmaffinity."
+		},
+		"p4": {
+			"name": "MovieCards Project: Service Decoupling and Quality Improvement",
+			"description": "This project focuses on refactoring and modernizing an existing application, MovieCards, by transforming a previously integrated service into an independent, cloud-deployable solution. The main objective is to establish a more flexible and scalable microservices-based architecture, allowing core functionality to be consumed by various platforms (web, mobile, desktop) in a decoupled manner."
+		},
+		"subtitle": "Projects ordered chronologically, from newest to oldest",
+		"noImage": "No image available"
+	},
+	"contact": {
+		"title": "Contact",
+		"headerDescription": "Got a project in mind? Let’s talk!",
+		"infoTitle": "Contact Information",
+		"locationTitle": "Location",
+		"whyWorkWithMe": "Why work with me?",
+		"benefit1": "Quick response within 24 hours",
+		"benefit2": "Development with the latest technologies",
+		"benefit3": "Clean, well-documented code",
+		"benefit4": "Post-development support",
+		"name": "Name",
+		"email": "Email",
+		"message": "Message",
+		"send": "Send",
+		"sending": "Sending…",
+		"success": "Message sent successfully. Thank you!",
+		"nameRequired": "Name is required.",
+		"emailRequired": "Email is required.",
+		"emailInvalid": "Email is not valid.",
+		"messageRequired": "Message is required.",
+		"errorMessage": "There was an error sending your message. Please try again."
+	},
+	"footer": {
+		"copyright": "© 2025 Amle Martinez Marte. All rights reserved.",
+		"builtWith": "Built with SvelteKit, Tailwind CSS, and Paraglide.js",
+		"navigation": "Navigation"
+	},
+	"skills": {
+		"basic": "Basic",
+		"intermediate": "Intermediate",
+		"advanced": "Advanced",
+		"expert": "Expert",
+		"native": "Native",
+		"technical": {
+			"frontend": "Frontend Development",
+			"backend": "Backend Development",
+			"database": "Databases",
+			"devops": "DevOps",
+			"mobile": "Mobile Development",
+			"uiux": "UI/UX Design",
+			"web": "Web Development",
+			"security": "Cybersecurity",
+			"scrum": "Agile Methodologies (Scrum)",
+			"container": "Containers (Docker, Kubernetes)",
+			"network": "Networks and Systems"
+		},
+		"languages": {
+			"spanish": "Spanish",
+			"english": "English",
+			"french": "French"
+		},
+		"soft": {
+			"teamwork": "Teamwork",
+			"problemSolving": "Problem Solving",
+			"adaptability": "Adaptability",
+			"proactivity": "Proactivity & Initiative",
+			"organization": "Organization & Planning",
+			"continuousLearning": "Continuous Learning",
+			"communication": "Effective Communication",
+			"resilience": "Resilience",
+			"selfAwareness": "Self-awareness"
+		},
+		"hobbies": {
+			"readingBooks": "Book Reading",
+			"readingComicsManga": "Comics & Manga Reading",
+			"playingPiano": "Playing Piano",
+			"listeningMedia": "Podcasts & Audiobooks",
+			"watchingMedia": "Movies & TV Series",
+			"gaming": "Gaming"
+		}
+	},
+	"timeline": {
+		"gap": "Gap of {n} year{s}",
+		"present": "Present",
+		"duration": "{n} year{s}"
+	},
+	  "work": {
         "1": {
             "position": "IT Support Technician",
             "description": "My job involved providing technical support to the company's 60 branches nationwide. This included helping users resolve network or system equipment issues, configuring IT equipment and VoIP phones. I also performed database queries to generate necessary company reports and documented internal IT department processes. Additionally, I created scripts to automate software updates and network performance monitoring, and tracked company vehicles using GPS devices."
@@ -135,52 +136,52 @@
             "description": "I completed my studies with Magna Cum Laude honors, achieving an average GPA of 93.6. During this period, I gained solid competencies in programming, covering languages such as Java, C++, HTML, and JavaScript, in addition to mastering database design and network and systems administration. I complemented my academic training with an active volunteer role in the IT department, where I collaborated on essential tasks such as the installation and maintenance of computer equipment. Additionally, I had the opportunity to serve as an assistant to a Physics professor, which involved supporting in the preparation and evaluation of classes."
         }
     },
-    "certificates": {
-        "fds": {
-            "name": "Foundations of Scrum",
-            "issuer": "Scrumstudy"
-        },
-        "acis": {
-            "name": "Diploma in Cybersecurity, Cloud Computing, and Telecommuting",
-            "issuer": "Association of Merchants and Industrialists (ACIS)"
-        },
-        "itla": {
-            "name": "Ethical Hacker",
-            "issuer": "Instituto Tecnológico de Las Américas (ITLA)"
-        },
-        "oea": {
-            "name": "Cybersecurity",
-            "issuer": "Organization of American States (OEA)"
-        },
-        "mescyt": {
-            "name": "Recognition in Web Programming with HTML, CSS, and JavaScript, and in Python Programming",
-            "issuer": "Ministry of Higher Education, Science and Technology (MESCyT)"
-        },
-        "eoi": {
-            "name": "Cybersecurity",
-            "issuer": "Escuela de Organización Industrial (EOI)"
-        },
-        "mescyt2": {
-            "name": "English Immersion for Competitiveness",
-            "issuer": "Ministry of Higher Education, Science and Technology (MESCyT)"
-        }
-    },
-    "common": {
-        "language": "Language",
-        "theme": "Theme",
-        "scrollToTop": "Back to top"
-    },
-    "example_message": "Greetings {username}",
-    "section": {
-        "technologies": "Technologies",
-        "workExperience": "Work Experience",
-        "education": "Education",
-        "projects": "Projects",
-        "technicalSkills": "Technical Skills",
-        "otherSkills": "Other Skills",
-        "softSkills": "Soft Skills",
-        "languages": "Languages",
-        "hobbies": "Hobbies",
-        "certificates": "Certificates"
-    }
+	"certificates": {
+		"fds": {
+			"name": "Foundations of Scrum",
+			"issuer": "Scrumstudy"
+		},
+		"acis": {
+			"name": "Diploma in Cybersecurity, Cloud Computing, and Telecommuting",
+			"issuer": "Association of Merchants and Industrialists (ACIS)"
+		},
+		"itla": {
+			"name": "Ethical Hacker",
+			"issuer": "Instituto Tecnológico de Las Américas (ITLA)"
+		},
+		"oea": {
+			"name": "Cybersecurity",
+			"issuer": "Organization of American States (OEA)"
+		},
+		"mescyt": {
+			"name": "Recognition in Web Programming with HTML, CSS, and JavaScript, and in Python Programming",
+			"issuer": "Ministry of Higher Education, Science and Technology (MESCyT)"
+		},
+		"eoi": {
+			"name": "Cybersecurity",
+			"issuer": "Escuela de Organización Industrial (EOI)"
+		},
+		"mescyt2": {
+			"name": "English Immersion for Competitiveness",
+			"issuer": "Ministry of Higher Education, Science and Technology (MESCyT)"
+		}
+	},
+	"common": {
+		"language": "Language",
+		"theme": "Theme",
+		"scrollToTop": "Back to top"
+	},
+	"example_message": "Greetings {username}",
+	"section": {
+		"technologies": "Technologies",
+		"workExperience": "Work Experience",
+		"education": "Education",
+		"projects": "Projects",
+		"technicalSkills": "Technical Skills",
+		"otherSkills": "Other Skills",
+		"softSkills": "Soft Skills",
+		"languages": "Languages",
+		"hobbies": "Hobbies",
+		"certificates": "Certificates"
+	}
 }

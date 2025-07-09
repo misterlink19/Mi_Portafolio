@@ -104,4 +104,3 @@
 		<a href={localizeHref($page.url.pathname, { locale: loc })}>{loc}</a>
 	{/each}
 </div>
-

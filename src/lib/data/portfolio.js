@@ -162,7 +162,7 @@ export const projects = [
 			'SonarQube',
 			'JUnit'
 		],
-		liveUrl: "https://moviecards-martinez.azurewebsites.net/",
+		liveUrl: 'https://moviecards-martinez.azurewebsites.net/',
 		githubUrl: 'https://github.com/misterlink19/Proyecto-Portal-Peliculas-5-Microservicios',
 		date: '2025-02-15'
 	}

@@ -64,7 +64,8 @@
 	},
 	"footer": {
 		"copyright": "© 2025 Amle Martinez Marte. Todos los derechos reservados.",
-		"builtWith": "Construido con SvelteKit, Tailwind CSS y Paraglide.js"
+		"builtWith": "Construido con SvelteKit, Tailwind CSS y Paraglide.js",
+		"navigation": "Navegación"
 	},
 	"skills": {
 		"basic": "Básico",
